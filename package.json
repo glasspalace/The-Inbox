@@ -12,6 +12,7 @@
     "dev:web": "npm run dev -w @parallax/web"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "concurrently": "^9.1.2",
     "typescript": "^5.8.2"
   }

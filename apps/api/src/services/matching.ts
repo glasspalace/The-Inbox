@@ -3,7 +3,7 @@ import type { Axis, IdeologyProfile, Topic } from "@parallax/shared";
 import { oppositeScore, totalDistance } from "@parallax/shared";
 import { TOPICS } from "../db/seed.js";
 import { createSessionRecord } from "../db/index.js";
-import { createRoomToken, generateRoomName } from "./livekit.js";
+import { createRoomToken, deleteRoom, generateRoomName } from "./livekit.js";
 
 interface QueueEntry {
   queueId: string;
@@ -162,7 +162,7 @@ async function createMatch(
   const tokenA = await createRoomToken(roomName, a.sessionId);
   const tokenB = await createRoomToken(roomName, b.sessionId);
 
-  const payload: MatchResult = {
+  const payloadA: MatchResult = {
     sessionId,
     roomName,
     livekitToken: tokenA?.token ?? "demo-token",
@@ -171,19 +171,19 @@ async function createMatch(
     partnerSessionId: b.sessionId,
   };
 
-  if (tokenB && b.wsSend) {
+  if (b.wsSend) {
     b.wsSend({
       type: "queue:matched",
       sessionId,
       roomName,
-      livekitToken: tokenB.token,
-      livekitUrl: tokenB.url,
+      livekitToken: tokenB?.token ?? "demo-token",
+      livekitUrl: tokenB?.url ?? "",
       topic,
       partnerSessionId: a.sessionId,
     });
   }
 
-  return payload;
+  return payloadA;
 }
 
 export function leaveQueue(queueId: string): void {
@@ -207,7 +207,11 @@ export function registerQueueWs(queueId: string, wsSend: (data: unknown) => void
 }
 
 export async function endSession(sessionId: string, reason: string): Promise<void> {
+  const session = activeSessions.get(sessionId);
   activeSessions.delete(sessionId);
+  if (session) {
+    await deleteRoom(session.roomName);
+  }
   const { endSessionRecord } = await import("../db/index.js");
   await endSessionRecord(sessionId, reason);
 }
