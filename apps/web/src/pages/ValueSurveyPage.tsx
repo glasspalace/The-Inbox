@@ -6,11 +6,11 @@ import { apiGet, apiPost } from "../lib/api";
 import { useAppStore } from "../lib/store";
 
 const LIKERT_OPTIONS: { value: LikertAnswer; label: string }[] = [
-  { value: 1, label: "Strongly Disagree" },
+  { value: 1, label: "Strongly disagree" },
   { value: 2, label: "Disagree" },
   { value: 3, label: "Neutral" },
   { value: 4, label: "Agree" },
-  { value: 5, label: "Strongly Agree" },
+  { value: 5, label: "Strongly agree" },
 ];
 
 export function ValueSurveyPage() {
@@ -68,7 +68,7 @@ export function ValueSurveyPage() {
 
   if (error && !questions.length) {
     return (
-      <Page title="Survey">
+      <Page title="Questions / signal lost">
         <p className="text-[var(--color-danger)]">{error}</p>
       </Page>
     );
@@ -76,61 +76,71 @@ export function ValueSurveyPage() {
 
   if (!current) {
     return (
-      <Page title="Survey">
-        <p className="text-[var(--color-muted)]">Loading questions…</p>
+      <Page title="Questions / loading">
+        <div className="loading-dial" />
+        <p className="text-[var(--color-muted)]">Loading questions...</p>
       </Page>
     );
   }
 
   return (
-    <Page title="Value survey">
-      <div className="mb-4">
-        <div className="h-1 bg-[var(--color-border)] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-[var(--color-accent)] transition-all"
-            style={{ width: `${progress}%` }}
-          />
+    <Page title="Questions / calibration">
+      <section className="survey-layout">
+        <div className="survey-side">
+          <span className="survey-count">{String(index + 1).padStart(2, "0")}</span>
+          <h1>Make a mark on the map.</h1>
+          <p>
+            Answer quickly. The point is not perfection; it is enough signal to find a useful
+            disagreement.
+          </p>
         </div>
-        <p className="text-sm text-[var(--color-muted)] mt-2">
-          Question {index + 1} of {questions.length}
-        </p>
-      </div>
 
-      <Card className="mb-6">
-        <p className="text-lg leading-relaxed">{current.text}</p>
-      </Card>
+        <div className="survey-console">
+          <div className="mb-5">
+            <div className="progress-track">
+              <div className="progress-bar" style={{ width: `${progress}%` }} />
+            </div>
+            <p className="text-sm text-[var(--color-muted)] mt-2">
+              Question {index + 1} of {questions.length}
+            </p>
+          </div>
 
-      <div className="flex flex-col gap-2 mb-6">
-        {LIKERT_OPTIONS.map((opt) => (
-          <button
-            key={opt.value}
-            type="button"
-            onClick={() => selectAnswer(opt.value)}
-            className={`text-left px-4 py-3 rounded-[var(--radius)] border transition ${
-              answers[current.id] === opt.value
-                ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10"
-                : "border-[var(--color-border)] hover:border-[var(--color-muted)]"
-            }`}
-          >
-            {opt.label}
-          </button>
-        ))}
-      </div>
+          <Card className="question-card mb-6">
+            <p>{current.text}</p>
+          </Card>
 
-      {error && <p className="text-[var(--color-danger)] text-sm mb-4">{error}</p>}
+          <div className="answer-stack mb-6">
+            {LIKERT_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => selectAnswer(opt.value)}
+                className={`answer-option ${
+                  answers[current.id] === opt.value ? "is-selected" : ""
+                }`}
+              >
+                <span>{opt.value}</span>
+                {opt.label}
+              </button>
+            ))}
+          </div>
 
-      <div className="flex gap-3">
-        <Button variant="secondary" onClick={goBack} disabled={index === 0}>
-          Back
-        </Button>
-        <Button
-          onClick={goNext}
-          disabled={!answers[current.id] || loading}
-          className="flex-1"
-        >
-          {loading ? "Saving…" : index === questions.length - 1 ? "Finish" : "Next"}
-        </Button>
-      </div>
+          {error && <p className="text-[var(--color-danger)] text-sm mb-4">{error}</p>}
+
+          <div className="flex gap-3">
+            <Button variant="secondary" onClick={goBack} disabled={index === 0}>
+              Back
+            </Button>
+            <Button
+              onClick={goNext}
+              disabled={!answers[current.id] || loading}
+              className="flex-1"
+            >
+              {loading ? "Saving..." : index === questions.length - 1 ? "Finish" : "Next"}
+            </Button>
+          </div>
+        </div>
+      </section>
     </Page>
   );
 }

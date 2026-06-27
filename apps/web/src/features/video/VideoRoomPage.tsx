@@ -49,7 +49,7 @@ function VideoTiles() {
           <VideoTrack trackRef={remoteVideo} className="w-full h-full object-cover" />
         ) : (
           <div className="flex items-center justify-center h-full text-[var(--color-muted)] text-sm">
-            Waiting for partner…
+            Waiting for partner...
           </div>
         )}
         <span className="absolute bottom-2 left-2 text-xs bg-black/60 px-2 py-0.5 rounded">
@@ -197,8 +197,8 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-2rem)] gap-3">
-      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] px-4 py-2 rounded-[var(--radius)] text-sm text-center">
+    <div className="room-shell flex flex-col h-[calc(100vh-2rem)] gap-3">
+      <div className="room-topic">
         Discussing: <span className="font-medium">{selectedTopic?.question}</span>
       </div>
 
@@ -216,7 +216,7 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
       />
 
       <div className="flex flex-1 min-h-0 gap-3">
-        <div className="flex-1 flex flex-col min-h-0 border border-[var(--color-border)] rounded-[var(--radius)]">
+        <div className="room-chat flex-1 flex flex-col min-h-0">
           <div className="flex-1 overflow-y-auto p-3 space-y-2 text-sm">
             {messages.map((m) => (
               <div
@@ -238,14 +238,14 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-              placeholder="Type a message…"
+              placeholder="Type a message..."
               className="flex-1 bg-[var(--color-bg)] border border-[var(--color-border)] rounded px-3 py-2 text-sm"
             />
             <Button onClick={sendMessage}>Send</Button>
           </div>
         </div>
 
-        <div className="w-64 hidden md:flex flex-col gap-2 overflow-y-auto">
+        <div className="context-rail w-64 hidden md:flex flex-col gap-2 overflow-y-auto">
           <p className="text-xs text-[var(--color-muted)] uppercase tracking-wide">Context</p>
           {factChecks.length === 0 ? (
             <p className="text-xs text-[var(--color-muted)]">Factual context cards appear here.</p>
@@ -337,8 +337,8 @@ function DemoRoom({ onLeave }: { onLeave: (reason: string) => void }) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm">Topic: {selectedTopic?.question}</p>
-      <div className="border border-[var(--color-border)] rounded p-3 min-h-[120px] space-y-1 text-sm">
+      <p className="room-topic">Topic: {selectedTopic?.question}</p>
+      <div className="room-chat p-3 min-h-[120px] space-y-1 text-sm">
         {messages.map((m, i) => (
           <p key={i}>{m}</p>
         ))}

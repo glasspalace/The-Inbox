@@ -5,15 +5,16 @@ export function SurveyResultsPage() {
   const navigate = useNavigate();
 
   return (
-    <Page>
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center gap-4">
-        <h1 className="text-2xl font-semibold">You&apos;re ready</h1>
-        <p className="text-[var(--color-muted)] max-w-sm">
-          Your profile is set. Pick a topic next — we&apos;ll match you with someone who sees it
-          differently.
+    <Page title="Signal / ready">
+      <section className="ready-screen">
+        <div className="ready-orb" aria-hidden="true" />
+        <h1>You are calibrated.</h1>
+        <p>
+          The map is rough enough to be useful. Choose a topic and Parallax will open the airlock
+          toward someone with a different read.
         </p>
         <Button onClick={() => navigate("/topics")}>Choose a topic</Button>
-      </div>
+      </section>
     </Page>
   );
 }

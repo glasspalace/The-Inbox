@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { type CSSProperties, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Topic } from "@parallax/shared";
-import { Button, Card, Page } from "../components/ui";
+import { Button, Page } from "../components/ui";
 import { apiGet } from "../lib/api";
 import { useAppStore } from "../lib/store";
+
+type TopicTileStyle = CSSProperties & { "--delay": string };
 
 export function TopicPickerPage() {
   const navigate = useNavigate();
@@ -28,27 +30,37 @@ export function TopicPickerPage() {
   };
 
   return (
-    <Page title="What do you want to talk about?">
-      <p className="text-[var(--color-muted)] mb-6">
-        Choose a topic. You&apos;ll be matched with someone who holds a different view.
-      </p>
-      {error && <p className="text-[var(--color-danger)] mb-4">{error}</p>}
-      <div className="flex flex-col gap-3">
-        {topics.map((topic) => (
-          <Card key={topic.id} className="cursor-pointer hover:border-[var(--color-accent)] transition">
+    <Page title="Topics / choose tension">
+      <section className="topic-layout">
+        <div className="section-heading">
+          <h1>Choose the question you can feel in your teeth.</h1>
+          <p>
+            Each topic becomes a temporary room. Pick one, and Parallax looks for someone whose
+            map bends differently from yours.
+          </p>
+        </div>
+
+        {error && <p className="text-[var(--color-danger)] mb-4">{error}</p>}
+
+        <div className="topic-grid">
+          {topics.map((topic, index) => (
             <button
+              key={topic.id}
               type="button"
-              className="w-full text-left"
+              className="topic-tile"
               onClick={() => selectTopic(topic)}
+              style={{ "--delay": `${index * 90}ms` } as TopicTileStyle}
             >
-              <p className="font-medium">{topic.question}</p>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p>{topic.question}</p>
             </button>
-          </Card>
-        ))}
-      </div>
-      <Button variant="secondary" className="mt-6" onClick={() => navigate("/")}>
-        Back
-      </Button>
+          ))}
+        </div>
+
+        <Button variant="secondary" className="mt-8" onClick={() => navigate("/")}>
+          Back home
+        </Button>
+      </section>
     </Page>
   );
 }
