@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   LiveKitRoom,
   RoomAudioRenderer,
   VideoTrack,
   useLocalParticipant,
+  useRoomContext,
   useTracks,
 } from "@livekit/components-react";
-import { Track } from "livekit-client";
+import { RoomEvent, Track } from "livekit-client";
 import type { FactCheck } from "@parallax/shared";
 import { apiPost } from "../../lib/api";
 import { useAppStore } from "../../lib/store";
@@ -18,7 +19,7 @@ import { Button } from "../../components/ui";
 interface ChatLine {
   id: string;
   text: string;
-  sender: "me" | "system";
+  sender: "me" | "partner" | "system";
 }
 
 function VideoTiles() {
@@ -33,10 +34,13 @@ function VideoTiles() {
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1 min-h-0">
-      <div className="bg-black rounded-[var(--radius)] aspect-video relative overflow-hidden">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 shrink-0">
+      <div
+        className="bg-black rounded-[var(--radius)] aspect-video max-h-[34vh] relative overflow-hidden"
+        data-local-video="true"
+      >
         {localVideo ? (
-          <VideoTrack trackRef={localVideo} className="w-full h-full object-cover" />
+          <VideoTrack trackRef={localVideo} className="w-full h-full object-cover pointer-events-none" />
         ) : (
           <div className="flex items-center justify-center h-full text-[var(--color-muted)] text-sm">
             Your camera
@@ -44,9 +48,9 @@ function VideoTiles() {
         )}
         <span className="absolute bottom-2 left-2 text-xs bg-black/60 px-2 py-0.5 rounded">You</span>
       </div>
-      <div className="bg-black rounded-[var(--radius)] aspect-video relative overflow-hidden">
+      <div className="bg-black rounded-[var(--radius)] aspect-video max-h-[34vh] relative overflow-hidden">
         {remoteVideo ? (
-          <VideoTrack trackRef={remoteVideo} className="w-full h-full object-cover" />
+          <VideoTrack trackRef={remoteVideo} className="w-full h-full object-cover pointer-events-none" />
         ) : (
           <div className="flex items-center justify-center h-full text-[var(--color-muted)] text-sm">
             Waiting for partner...
@@ -102,6 +106,7 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
   const moderationWarning = useAppStore((s) => s.moderationWarning);
   const setModerationWarning = useAppStore((s) => s.setModerationWarning);
   const { localParticipant } = useLocalParticipant();
+  const room = useRoomContext();
 
   const [messages, setMessages] = useState<ChatLine[]>([
     {
@@ -122,7 +127,7 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
 
   const sampleFrame = useCallback(async () => {
     if (!sessionId) return;
-    const videoEl = document.querySelector("video") as HTMLVideoElement | null;
+    const videoEl = document.querySelector("[data-local-video='true'] video") as HTMLVideoElement | null;
     if (!videoEl || videoEl.videoWidth === 0) return;
 
     const canvas = document.createElement("canvas");
@@ -135,7 +140,7 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
     if (!base64) return;
 
     try {
-      const result = await apiPost<{ action: string; reason?: string }>("/moderate/frame", {
+      const result = await apiPost<{ action: string; reason?: string; banned?: boolean }>("/moderate/frame", {
         sessionId,
         imageBase64: base64,
       });
@@ -155,6 +160,35 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
     };
   }, [sampleFrame]);
 
+  useEffect(() => {
+    const onData = (payload: Uint8Array) => {
+      try {
+        const decoded = JSON.parse(new TextDecoder().decode(payload)) as { type?: string; text?: string };
+        if (decoded.type !== "chat" || !decoded.text) return;
+        setMessages((m) => [...m, { id: crypto.randomUUID(), text: decoded.text, sender: "partner" }]);
+      } catch {
+        // ignore malformed data messages
+      }
+    };
+
+    room.on(RoomEvent.DataReceived, onData);
+    return () => {
+      room.off(RoomEvent.DataReceived, onData);
+    };
+  }, [room]);
+
+  useEffect(() => {
+    const onParticipantDisconnected = () => {
+      if (room.remoteParticipants.size > 0) return;
+      onLeave("skip");
+    };
+
+    room.on(RoomEvent.ParticipantDisconnected, onParticipantDisconnected);
+    return () => {
+      room.off(RoomEvent.ParticipantDisconnected, onParticipantDisconnected);
+    };
+  }, [onLeave, room]);
+
   const sendMessage = async () => {
     const text = input.trim();
     if (!text || !sessionId || !userSessionId) return;
@@ -162,7 +196,9 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
     try {
       const result = await apiPost<{
         allowed: boolean;
+        action: "allow" | "warn" | "block" | "end_session";
         reason?: string;
+        banned?: boolean;
         factCheck?: FactCheck;
       }>("/moderate/text", {
         sessionId,
@@ -172,9 +208,20 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
 
       if (!result.allowed) {
         setModerationWarning(result.reason ?? "Message blocked");
+        if (result.action === "end_session") {
+          onLeave("moderation");
+        }
         return;
       }
 
+      if (result.action === "warn") {
+        setModerationWarning(result.reason ?? "Please keep the conversation respectful.");
+      }
+
+      await room.localParticipant.publishData(
+        new TextEncoder().encode(JSON.stringify({ type: "chat", text })),
+        { reliable: true, topic: "chat" }
+      );
       setMessages((m) => [...m, { id: crypto.randomUUID(), text, sender: "me" }]);
       setInput("");
 
@@ -224,7 +271,9 @@ function RoomInner({ onLeave }: { onLeave: (reason: string) => void }) {
                 className={
                   m.sender === "system"
                     ? "text-[var(--color-muted)] italic text-xs"
-                    : "text-[var(--color-text)]"
+                    : m.sender === "me"
+                      ? "text-[var(--color-text)]"
+                      : "text-[var(--color-text)] opacity-85"
                 }
               >
                 {m.text}
@@ -265,18 +314,24 @@ export function VideoRoomPage() {
   const livekitUrl = useAppStore((s) => s.livekitUrl);
   const userSessionId = useAppStore((s) => s.sessionId);
   const clearMatch = useAppStore((s) => s.clearMatch);
+  const setModerationWarning = useAppStore((s) => s.setModerationWarning);
+  const leaveInFlightRef = useRef(false);
 
   const handleLeave = async (reason: string) => {
+    if (leaveInFlightRef.current) return;
+    leaveInFlightRef.current = true;
+
     if (matchSessionId) {
-      await apiPost("/session/skip", { sessionId: matchSessionId, reason }).catch(() => {});
+      const endpoint = reason === "report" ? "/session/report" : "/session/skip";
+      await apiPost(endpoint, { sessionId: matchSessionId, reason }).catch(() => {});
     }
     clearMatch();
     navigate(reason === "skip" ? "/queue" : "/feedback");
   };
 
   if (!matchSessionId || !livekitToken || !userSessionId) {
-    navigate("/topics");
-    return null;
+    if (leaveInFlightRef.current) return null;
+    return <Navigate to="/topics" replace />;
   }
 
   const serverUrl = livekitUrl || "wss://demo.livekit.cloud";
@@ -302,6 +357,14 @@ export function VideoRoomPage() {
         connect
         video
         audio
+        onError={(error) => {
+          setModerationWarning(`Video connection failed: ${error.message}`);
+        }}
+        onMediaDeviceFailure={(_, kind) => {
+          setModerationWarning(
+            kind ? `${kind} access failed. Check browser permissions.` : "Camera or microphone access failed."
+          );
+        }}
         onDisconnected={() => handleLeave("skip")}
       >
         <RoomAudioRenderer />
@@ -317,27 +380,51 @@ function DemoRoom({ onLeave }: { onLeave: (reason: string) => void }) {
   const userSessionId = useAppStore((s) => s.sessionId);
   const factChecks = useAppStore((s) => s.factChecks);
   const addFactCheck = useAppStore((s) => s.addFactCheck);
+  const moderationWarning = useAppStore((s) => s.moderationWarning);
+  const setModerationWarning = useAppStore((s) => s.setModerationWarning);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<string[]>([]);
 
   const send = async () => {
     const text = input.trim();
     if (!text || !matchSessionId || !userSessionId) return;
-    const result = await apiPost<{ allowed: boolean; factCheck?: FactCheck }>("/moderate/text", {
-      sessionId: matchSessionId,
-      text,
-      senderId: userSessionId,
-    });
-    if (result.allowed) {
+    try {
+      const result = await apiPost<{
+        allowed: boolean;
+        action: "allow" | "warn" | "block" | "end_session";
+        reason?: string;
+        banned?: boolean;
+        factCheck?: FactCheck;
+      }>("/moderate/text", {
+        sessionId: matchSessionId,
+        text,
+        senderId: userSessionId,
+      });
+
+      if (!result.allowed) {
+        setModerationWarning(result.reason ?? "Message blocked");
+        if (result.action === "end_session") {
+          onLeave("moderation");
+        }
+        return;
+      }
+
+      if (result.action === "warn") {
+        setModerationWarning(result.reason ?? "Please keep the conversation respectful.");
+      }
+
       setMessages((m) => [...m, text]);
       if (result.factCheck) addFactCheck(result.factCheck);
+      setInput("");
+    } catch (e) {
+      setModerationWarning(e instanceof Error ? e.message : "Send failed");
     }
-    setInput("");
   };
 
   return (
     <div className="space-y-4">
       <p className="room-topic">Topic: {selectedTopic?.question}</p>
+      {moderationWarning && <ModerationBanner message={moderationWarning} />}
       <div className="room-chat p-3 min-h-[120px] space-y-1 text-sm">
         {messages.map((m, i) => (
           <p key={i}>{m}</p>
