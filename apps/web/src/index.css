@@ -369,39 +369,6 @@ input {
   animation-delay: -4.2s;
 }
 
-.giant-word {
-  position: absolute;
-  left: -1vw;
-  bottom: -2.2rem;
-  z-index: 1;
-  color: var(--color-text);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(7rem, 20vw, 24rem);
-  font-style: italic;
-  line-height: 0.72;
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-.ticker {
-  display: flex;
-  gap: 2rem;
-  overflow: hidden;
-  border-block: 1px solid rgba(245, 241, 232, 0.7);
-  background: var(--color-text);
-  color: var(--color-ink);
-}
-
-.ticker span {
-  flex: 0 0 auto;
-  padding: 0.5rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: clamp(1rem, 2.8vw, 2.4rem);
-  font-weight: 1000;
-  animation: ticker 16s linear infinite;
-}
-
 .process-section,
 .room-entry {
   position: relative;
@@ -772,12 +739,6 @@ input {
   }
 }
 
-@keyframes ticker {
-  to {
-    transform: translateX(-100%);
-  }
-}
-
 @keyframes reveal {
   from {
     opacity: 0;
@@ -874,10 +835,6 @@ input {
 
   .hero-copy h1 {
     font-size: clamp(4.5rem, 25vw, 7rem);
-  }
-
-  .giant-word {
-    font-size: 7rem;
   }
 
   .process-panel,
