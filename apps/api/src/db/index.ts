@@ -1,55 +1,54 @@
-import pg from "pg";
+import Database from "better-sqlite3";
+import { randomUUID } from "node:crypto";
 import { config } from "../config.js";
 
-const { Pool } = pg;
+let db: Database.Database | null = null;
 
-let pool: pg.Pool | null = null;
-
-export function getPool(): pg.Pool {
-  if (!pool) {
-    pool = new Pool({ connectionString: config.databaseUrl });
+export function getDb(): Database.Database {
+  if (!db) {
+    db = new Database(config.databaseUrl);
+    db.pragma("journal_mode = WAL");
   }
-  return pool;
+  return db;
 }
 
 export async function initDb(): Promise<void> {
-  const db = getPool();
-  await db.query(`CREATE EXTENSION IF NOT EXISTS "pgcrypto"`);
-  await db.query(`
+  const sqlite = getDb();
+  sqlite.exec(`
     CREATE TABLE IF NOT EXISTS moderation_events (
-      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      id TEXT PRIMARY KEY,
       session_id TEXT NOT NULL,
       type TEXT NOT NULL,
       action TEXT NOT NULL,
       confidence REAL NOT NULL,
-      payload JSONB,
-      created_at TIMESTAMPTZ DEFAULT NOW()
+      payload TEXT,
+      created_at INTEGER NOT NULL DEFAULT (unixepoch())
     );
 
     CREATE TABLE IF NOT EXISTS ban_entries (
       ip_hash TEXT PRIMARY KEY,
       reason TEXT NOT NULL,
-      expires_at TIMESTAMPTZ,
-      created_at TIMESTAMPTZ DEFAULT NOW()
+      expires_at INTEGER,
+      created_at INTEGER NOT NULL DEFAULT (unixepoch())
     );
 
     CREATE TABLE IF NOT EXISTS sessions (
       id TEXT PRIMARY KEY,
       topic_id TEXT NOT NULL,
       room_name TEXT NOT NULL,
-      started_at TIMESTAMPTZ DEFAULT NOW(),
-      ended_at TIMESTAMPTZ,
+      started_at INTEGER NOT NULL DEFAULT (unixepoch()),
+      ended_at INTEGER,
       end_reason TEXT
     );
 
     CREATE TABLE IF NOT EXISTS fact_checks (
-      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      id TEXT PRIMARY KEY,
       session_id TEXT NOT NULL,
       claim TEXT NOT NULL,
       verdict TEXT NOT NULL,
       summary TEXT NOT NULL,
-      sources JSONB NOT NULL DEFAULT '[]',
-      created_at TIMESTAMPTZ DEFAULT NOW()
+      sources TEXT NOT NULL DEFAULT '[]',
+      created_at INTEGER NOT NULL DEFAULT (unixepoch())
     );
   `);
 }
@@ -62,10 +61,11 @@ export async function logModerationEvent(
   payload?: unknown
 ): Promise<void> {
   try {
-    await getPool().query(
-      `INSERT INTO moderation_events (session_id, type, action, confidence, payload) VALUES ($1, $2, $3, $4, $5)`,
-      [sessionId, type, action, confidence, payload ? JSON.stringify(payload) : null]
-    );
+    getDb()
+      .prepare(
+        `INSERT INTO moderation_events (id, session_id, type, action, confidence, payload) VALUES (?, ?, ?, ?, ?, ?)`
+      )
+      .run(randomUUID(), sessionId, type, action, confidence, payload ? JSON.stringify(payload) : null);
   } catch {
     // DB optional in dev without docker
   }
@@ -78,20 +78,23 @@ export async function saveFactCheck(
   summary: string,
   sources: unknown[]
 ): Promise<string> {
-  const result = await getPool().query(
-    `INSERT INTO fact_checks (session_id, claim, verdict, summary, sources) VALUES ($1, $2, $3, $4, $5) RETURNING id`,
-    [sessionId, claim, verdict, summary, JSON.stringify(sources)]
-  );
-  return result.rows[0].id as string;
+  const id = randomUUID();
+  getDb()
+    .prepare(
+      `INSERT INTO fact_checks (id, session_id, claim, verdict, summary, sources) VALUES (?, ?, ?, ?, ?, ?)`
+    )
+    .run(id, sessionId, claim, verdict, summary, JSON.stringify(sources));
+  return id;
 }
 
 export async function upsertBan(ipHash: string, reason: string, expiresAt: Date | null): Promise<void> {
   try {
-    await getPool().query(
-      `INSERT INTO ban_entries (ip_hash, reason, expires_at) VALUES ($1, $2, $3)
-       ON CONFLICT (ip_hash) DO UPDATE SET reason = $2, expires_at = $3`,
-      [ipHash, reason, expiresAt]
-    );
+    getDb()
+      .prepare(
+        `INSERT INTO ban_entries (ip_hash, reason, expires_at) VALUES (?, ?, ?)
+         ON CONFLICT(ip_hash) DO UPDATE SET reason = excluded.reason, expires_at = excluded.expires_at`
+      )
+      .run(ipHash, reason, expiresAt ? Math.floor(expiresAt.getTime() / 1000) : null);
   } catch {
     // DB optional in dev
   }
@@ -99,11 +102,12 @@ export async function upsertBan(ipHash: string, reason: string, expiresAt: Date 
 
 export async function isBanned(ipHash: string): Promise<boolean> {
   try {
-    const result = await getPool().query(
-      `SELECT 1 FROM ban_entries WHERE ip_hash = $1 AND (expires_at IS NULL OR expires_at > NOW())`,
-      [ipHash]
-    );
-    return result.rowCount !== null && result.rowCount > 0;
+    const result = getDb()
+      .prepare(
+        `SELECT 1 FROM ban_entries WHERE ip_hash = ? AND (expires_at IS NULL OR expires_at > unixepoch()) LIMIT 1`
+      )
+      .get(ipHash);
+    return Boolean(result);
   } catch {
     return false;
   }
@@ -115,10 +119,7 @@ export async function createSessionRecord(
   roomName: string
 ): Promise<void> {
   try {
-    await getPool().query(
-      `INSERT INTO sessions (id, topic_id, room_name) VALUES ($1, $2, $3)`,
-      [id, topicId, roomName]
-    );
+    getDb().prepare(`INSERT INTO sessions (id, topic_id, room_name) VALUES (?, ?, ?)`).run(id, topicId, roomName);
   } catch {
     // DB optional in dev
   }
@@ -126,10 +127,7 @@ export async function createSessionRecord(
 
 export async function endSessionRecord(id: string, reason: string): Promise<void> {
   try {
-    await getPool().query(
-      `UPDATE sessions SET ended_at = NOW(), end_reason = $2 WHERE id = $1`,
-      [id, reason]
-    );
+    getDb().prepare(`UPDATE sessions SET ended_at = unixepoch(), end_reason = ? WHERE id = ?`).run(reason, id);
   } catch {
     // DB optional in dev
   }

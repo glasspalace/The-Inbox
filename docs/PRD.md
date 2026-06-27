@@ -129,7 +129,7 @@ Survey runs **once per session** (or once per 24h). User does not manually decla
 - **Text**: every message scanned before display (latency budget ~200ms)
 - **Video**: sample 1 frame every N seconds → vision moderation API (not continuous full-video ML in MVP)
 - **Actions**: allow | blur/warn | end session | increment violation counter
-- **IP ban**: after 3 confirmed severe violations in 24h (Redis counter + Postgres audit log)
+- **IP ban**: after 3 confirmed severe violations in 24h (Redis counter + SQLite audit log)
 
 ### 7. Factual correction (Exa)
 - Transcript pipeline: speech-to-text (Web Speech API or Deepgram) + periodic batch on text messages
@@ -238,7 +238,7 @@ POST https://api.exa.ai/search
 | Text safety | OpenAI Moderation API or Llama Guard | Block explicit/abusive text |
 | Vision safety | Same provider vision endpoint on sampled frames | Detect explicit video |
 | Claim detection | Small fast LLM (GPT-4o-mini / Claude Haiku) | Separate facts from opinions |
-| Ban logic | Redis + Postgres | Rate limits and IP ban enforcement |
+| Ban logic | Redis + SQLite | Rate limits and IP ban enforcement |
 
 Exa does **not** replace moderation — it only grounds factual corrections.
 
@@ -257,7 +257,7 @@ parallax/
 │   └── api/              # Node.js signaling, matching, moderation, Exa
 ├── packages/
 │   └── shared/           # Shared types (Topic, Stance, Session, FactCheck)
-├── docker-compose.yml    # Redis, Postgres, coturn (TURN)
+├── docker-compose.yml    # Redis
 ├── .env.example
 └── docs/
     └── PRD.md            # This document
@@ -291,7 +291,7 @@ parallax/
 | **Node.js + Fastify + TypeScript** | Same language as frontend; good WebSocket support |
 | **LiveKit Server SDK** | Create rooms, tokens, webhooks |
 | **Redis** | Match queues, ban counters, session state |
-| **PostgreSQL** | Topics, moderation audit, violation history |
+| **SQLite** | Topics, moderation audit, violation history |
 | **Socket.io** (or LiveKit data channels) | Queue updates, fact-check push to client |
 | **exa-js** | Fact-check retrieval |
 | **OpenAI SDK** | Moderation + claim extraction |
@@ -302,7 +302,7 @@ parallax/
 |---------|---------|
 | **LiveKit Cloud** (free tier) | WebRTC SFU + TURN — avoid self-hosting WebRTC initially |
 | **Upstash Redis** or Docker Redis | Matchmaking |
-| **Neon Postgres** or Docker Postgres | Persistent data |
+| **SQLite (local DB file)** | Persistent data |
 | **Deepgram** (optional v0.2) | Better STT than browser-only |
 
 ### Why not Next.js for temp frontend?
@@ -381,7 +381,7 @@ The v0 UI should be **intentionally utilitarian** so a designer can reskin later
 ## Implementation phases
 
 ### Phase 0 — Scaffold (agent, ~1 session)
-- Monorepo, Vite app, Fastify API, Docker Compose (Redis + Postgres)
+- Monorepo, Vite app, Fastify API, Docker Compose (Redis)
 - Seed 10 survey questions + 5 policy topics; landing → survey → topic picker flow
 
 ### Phase 1 — Video matching

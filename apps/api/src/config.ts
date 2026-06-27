@@ -4,7 +4,7 @@ export const config = {
   port: parseInt(process.env.PORT ?? "3001", 10),
   host: process.env.HOST ?? "0.0.0.0",
   corsOrigin: process.env.CORS_ORIGIN ?? "http://localhost:5173",
-  databaseUrl: process.env.DATABASE_URL ?? "postgresql://parallax:parallax@localhost:5432/parallax",
+  databaseUrl: process.env.DATABASE_URL ?? "./parallax.sqlite",
   redisUrl: process.env.REDIS_URL ?? "redis://localhost:6379",
   livekitUrl: process.env.LIVEKIT_URL ?? "",
   livekitApiKey: process.env.LIVEKIT_API_KEY ?? "",

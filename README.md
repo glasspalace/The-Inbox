@@ -5,7 +5,7 @@ Video-first conversations with people who hold opposing views on curated topics.
 ## Stack
 
 - **Frontend**: Vite + React 19 + TypeScript + Tailwind CSS v4 + LiveKit
-- **Backend**: Fastify + WebSocket + Redis + PostgreSQL
+- **Backend**: Fastify + WebSocket + Redis + SQLite
 - **AI**: OpenAI (moderation + claim extraction), Exa (fact-checking)
 
 ## Quick start
@@ -56,4 +56,3 @@ apps/web/          # Temp frontend (replaceable UI)
 apps/api/          # Fastify API, matching, moderation, Exa
 packages/shared/   # Shared types and survey scoring
 ```
->>>>>>> 377df01e3b2c5a4b2621aa28beed60de7e274feb
