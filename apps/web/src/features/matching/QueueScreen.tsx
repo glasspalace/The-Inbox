@@ -11,7 +11,9 @@ export function useMatchQueue() {
   const setQueue = useAppStore((s) => s.setQueue);
   const setMatch = useAppStore((s) => s.setMatch);
   const wsRef = useRef<WebSocket | null>(null);
-  const [status, setStatus] = useState<"idle" | "connecting" | "waiting" | "matched" | "timeout" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "connecting" | "waiting" | "matched" | "timeout" | "error"
+  >("idle");
   const [error, setError] = useState<string | null>(null);
   const queueIdRef = useRef<string | null>(null);
 
@@ -113,29 +115,41 @@ export function QueueScreen() {
   }, [status, navigate]);
 
   return (
-    <Page>
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center gap-4">
+    <Page title="Queue / airlock">
+      <div className="queue-screen">
         {status === "waiting" || status === "connecting" ? (
           <>
-            <div className="w-10 h-10 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin" />
-            <p className="text-lg">
-              Finding someone with a different view on{" "}
-              <span className="font-medium">{selectedTopic?.question}</span>…
+            <div className="queue-portal" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </div>
+            <h1>Holding the room open.</h1>
+            <p>
+              Finding someone with a different view on <span>{selectedTopic?.question}</span>...
             </p>
           </>
         ) : status === "timeout" ? (
           <>
-            <p className="text-[var(--color-muted)]">No match found yet. Try another topic?</p>
+            <h1>No counterview arrived yet.</h1>
+            <p className="text-[var(--color-muted)]">Try a different live tension.</p>
             <Button onClick={() => navigate("/topics")}>Choose different topic</Button>
           </>
         ) : status === "error" ? (
           <>
+            <h1>Signal dropped.</h1>
             <p className="text-[var(--color-danger)]">{error}</p>
             <Button onClick={() => navigate("/topics")}>Back to topics</Button>
           </>
         ) : null}
         {(status === "waiting" || status === "connecting") && (
-          <Button variant="secondary" onClick={() => { cancel(); navigate("/topics"); }}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              cancel();
+              navigate("/topics");
+            }}
+          >
             Cancel
           </Button>
         )}

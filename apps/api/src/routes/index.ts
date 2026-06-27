@@ -121,17 +121,33 @@ export async function registerRoutes(app: FastifyInstance): Promise<void> {
     );
 
     if (banned) {
-      return reply.status(403).send({ error: "Banned due to repeated violations", banned: true });
+      await endSession(sessionId, "moderation");
+      return {
+        allowed: false,
+        action: "end_session",
+        reason: "Banned due to repeated violations",
+        banned: true,
+        violationCount,
+      };
     }
 
-    if (result.action === "block" || result.action === "end_session") {
-      await endSession(sessionId, "moderation");
-      return reply.status(422).send({
+    if (result.action === "block") {
+      return {
         allowed: false,
         action: result.action,
         reason: result.reason,
         violationCount,
-      });
+      };
+    }
+
+    if (result.action === "end_session") {
+      await endSession(sessionId, "moderation");
+      return {
+        allowed: false,
+        action: result.action,
+        reason: result.reason,
+        violationCount,
+      };
     }
 
     let factCheck = null;
@@ -163,7 +179,13 @@ export async function registerRoutes(app: FastifyInstance): Promise<void> {
     );
 
     if (banned) {
-      return reply.status(403).send({ error: "Banned", banned: true });
+      await endSession(sessionId, "moderation");
+      return {
+        action: "end_session",
+        reason: "Banned due to repeated violations",
+        banned: true,
+        violationCount,
+      };
     }
 
     if (result.action === "end_session") {

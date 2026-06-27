@@ -20,25 +20,21 @@ export function FeedbackPage() {
   };
 
   return (
-    <Page title="Quick feedback">
+    <Page title="After / residue">
       {!submitted ? (
-        <div className="space-y-6">
-          <p className="text-[var(--color-muted)]">
-            Did you better understand the other side? (1 = not at all, 5 = very much)
-          </p>
-          <div className="flex gap-2 justify-center">
+        <section className="ready-screen">
+          <h1>Did the room move anything?</h1>
+          <p>Rate whether you better understood the other side.</p>
+          <div className="answer-stack w-full max-w-xl mb-8">
             {[1, 2, 3, 4, 5].map((n) => (
               <button
                 key={n}
                 type="button"
                 onClick={() => setScore(n)}
-                className={`w-12 h-12 rounded-[var(--radius)] border font-medium ${
-                  score === n
-                    ? "border-[var(--color-accent)] bg-[var(--color-accent)]/20"
-                    : "border-[var(--color-border)]"
-                }`}
+                className={`answer-option ${score === n ? "is-selected" : ""}`}
               >
-                {n}
+                <span>{n}</span>
+                {n === 1 ? "Not at all" : n === 5 ? "Very much" : "Some movement"}
               </button>
             ))}
           </div>
@@ -56,12 +52,13 @@ export function FeedbackPage() {
               Skip
             </Button>
           </div>
-        </div>
+        </section>
       ) : (
-        <div className="text-center space-y-4">
-          <p>Thanks for your feedback.</p>
+        <section className="ready-screen">
+          <div className="ready-orb" aria-hidden="true" />
+          <h1>Signal received.</h1>
           <Button onClick={() => navigate("/topics")}>Talk again</Button>
-        </div>
+        </section>
       )}
     </Page>
   );
