@@ -4,6 +4,7 @@ import { oppositeScore, totalDistance } from "@parallax/shared";
 import { TOPICS } from "../db/seed.js";
 import { createSessionRecord } from "../db/index.js";
 import { createRoomToken, deleteRoom, generateRoomName } from "./livekit.js";
+import { generateStarterQuestion } from "./starterQuestion.js";
 
 interface QueueEntry {
   queueId: string;
@@ -15,7 +16,10 @@ interface QueueEntry {
 }
 
 const queues = new Map<string, QueueEntry[]>();
-const activeSessions = new Map<string, { topicId: string; roomName: string; participants: string[] }>();
+const activeSessions = new Map<
+  string,
+  { topicId: string; roomName: string; participants: string[]; starterQuestion: string }
+>();
 
 export function getTopic(topicId: string): Topic | undefined {
   return TOPICS.find((t) => t.id === topicId && t.active);
@@ -69,6 +73,7 @@ export interface MatchResult {
   livekitToken: string;
   livekitUrl: string;
   topic: Topic;
+  starterQuestion: string;
   partnerSessionId: string;
 }
 
@@ -153,14 +158,16 @@ async function createMatch(
 
   await createSessionRecord(sessionId, topic.id, roomName);
 
+  const tokenA = await createRoomToken(roomName, a.sessionId);
+  const tokenB = await createRoomToken(roomName, b.sessionId);
+  const starterQuestion = await generateStarterQuestion(topic, a.profile, b.profile);
+
   activeSessions.set(sessionId, {
     topicId: topic.id,
     roomName,
     participants: [a.sessionId, b.sessionId],
+    starterQuestion,
   });
-
-  const tokenA = await createRoomToken(roomName, a.sessionId);
-  const tokenB = await createRoomToken(roomName, b.sessionId);
 
   const payloadA: MatchResult = {
     sessionId,
@@ -168,6 +175,7 @@ async function createMatch(
     livekitToken: tokenA?.token ?? "demo-token",
     livekitUrl: tokenA?.url ?? "",
     topic,
+    starterQuestion,
     partnerSessionId: b.sessionId,
   };
 
@@ -179,6 +187,7 @@ async function createMatch(
       livekitToken: tokenB?.token ?? "demo-token",
       livekitUrl: tokenB?.url ?? "",
       topic,
+      starterQuestion,
       partnerSessionId: a.sessionId,
     });
   }

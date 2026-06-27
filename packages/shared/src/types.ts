@@ -23,7 +23,9 @@ export interface IdeologyProfile {
 export interface Topic {
   id: string;
   slug: string;
+  title: string;
   question: string;
+  description: string;
   primaryAxis: Axis;
   active: boolean;
 }
@@ -79,6 +81,7 @@ export interface MatchPayload {
   livekitToken: string;
   livekitUrl: string;
   topic: Topic;
+  starterQuestion: string;
 }
 
 export interface ChatMessage {
