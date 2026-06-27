@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electrowizard</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <canvas id="circuit-canvas" aria-hidden="true"></canvas>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Electrowizard home">
+        <span class="brand-mark">EW</span>
+        <span>Electrowizard</span>
+      </a>
+      <nav class="menu" aria-label="Primary navigation">
+        <a href="#scan">Scan</a>
+        <a href="#projects">Projects</a>
+        <a href="#download">Download</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" data-cursor="signal">
+        <div class="hero-copy">
+          <p class="eyebrow">Component scanner / project oracle</p>
+          <h1>Electrowizard</h1>
+          <p class="lead">
+            Scan the parts on your desk. Get buildable electronics projects from the exact
+            components you already have.
+          </p>
+          <div class="actions">
+            <a class="button primary" id="download-apk-hero" href="" download>Download APK</a>
+            <a class="button secondary" href="#scan">See the scan</a>
+          </div>
+        </div>
+
+        <div class="scanner-stage" aria-label="Animated component scanner preview">
+          <div class="scan-window">
+            <div class="scan-beam"></div>
+            <div class="component resistor" style="--x: 16%; --y: 28%; --r: -14deg">
+              <i></i><span>220R</span>
+            </div>
+            <div class="component led" style="--x: 62%; --y: 22%; --r: 18deg">
+              <i></i><span>LED</span>
+            </div>
+            <div class="component arduino" style="--x: 34%; --y: 58%; --r: 4deg">
+              <i></i><span>UNO</span>
+            </div>
+            <div class="component capacitor" style="--x: 73%; --y: 66%; --r: -9deg">
+              <i></i><span>10uF</span>
+            </div>
+            <div class="scan-readout">
+              <span>Detected</span>
+              <strong>4 parts</strong>
+            </div>
+          </div>
+          <div class="floating-panel panel-a">
+            <span>Suggestion</span>
+            <strong>LED traffic light</strong>
+          </div>
+          <div class="floating-panel panel-b">
+            <span>Skill level</span>
+            <strong>Beginner</strong>
+          </div>
+        </div>
+
+        <p class="giant-word" aria-hidden="true">Scan</p>
+      </section>
+
+      <div class="ticker" aria-hidden="true">
+        <span>resistors</span>
+        <span>arduino</span>
+        <span>leds</span>
+        <span>capacitors</span>
+        <span>breadboards</span>
+        <span>servos</span>
+      </div>
+
+      <section class="scan-section" id="scan">
+        <div class="section-heading">
+          <p class="eyebrow">How it works</p>
+          <h2>Point the camera at your parts drawer.</h2>
+          <p>
+            Electrowizard reads common components, groups them by function, then suggests projects
+            with the fewest missing pieces.
+          </p>
+        </div>
+
+        <div class="signal-grid">
+          <article class="signal-card">
+            <span>01</span>
+            <h3>Scan components</h3>
+            <p>Capture resistors, LEDs, sensors, boards, wires, and modules in one fast pass.</p>
+          </article>
+          <article class="signal-card">
+            <span>02</span>
+            <h3>Decode inventory</h3>
+            <p>The app turns messy workbench parts into a usable build list.</p>
+          </article>
+          <article class="signal-card">
+            <span>03</span>
+            <h3>Pick a project</h3>
+            <p>Get project ideas matched to your components, difficulty, and time.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="projects-section" id="projects">
+        <div class="project-console">
+          <div class="console-top">
+            <span>Inventory input</span>
+            <span class="live-dot">live</span>
+          </div>
+          <div class="chips">
+            <button data-project="traffic" class="chip is-active">Arduino + LEDs + resistors</button>
+            <button data-project="alarm" class="chip">Buzzer + sensor + jumper wires</button>
+            <button data-project="servo" class="chip">Servo + potentiometer + board</button>
+          </div>
+          <div class="project-output" id="project-output">
+            <p class="eyebrow">Possible build</p>
+            <h3>LED traffic light</h3>
+            <p>
+              Program red, yellow, and green LEDs with timed states. Add a button later for a
+              pedestrian crossing mode.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-copy">
+          <p class="eyebrow">Project suggestions</p>
+          <h2>No more staring at parts and forgetting what they can become.</h2>
+          <p>
+            The app is made for students, hobbyists, and anyone with a tiny pile of components and
+            a sudden urge to make something glow, move, beep, or measure the world.
+          </p>
+        </div>
+      </section>
+
+      <section class="download-section" id="download">
+        <div class="download-poster" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-scan"></div>
+            <span>EW</span>
+          </div>
+        </div>
+        <div class="download-copy">
+          <p class="eyebrow">Android preview</p>
+          <h2>Download Electrowizard.</h2>
+          <p>
+            The APK button is wired and ready. Drop in the file path later and it will download the
+            Android build directly.
+          </p>
+          <a class="button primary" id="download-apk" href="" download>Download APK</a>
+          <p class="download-note" id="download-note">APK link not attached yet.</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

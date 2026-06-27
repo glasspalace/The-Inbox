@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parallax — Investor Pitch Deck</title>
+  <style>
+    :root {
+      --bg: #030303;
+      --surface: #191b1e;
+      --text: #f5f1e8;
+      --muted: #9b9a96;
+      --accent: #e83d32;
+      --accent-hover: #ff5a4f;
+      --ink: #070707;
+      --border: rgba(232, 61, 50, 0.25);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+    }
+
+    .deck {
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      height: 100vh;
+      padding: 3rem 4.5rem 5rem;
+      grid-template-rows: auto 1fr auto;
+      gap: 1.5rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 100% 0%, rgba(232, 61, 50, 0.12), transparent 55%),
+        linear-gradient(135deg, #020202 0%, #080807 45%, #15130f 100%);
+      animation: fadeIn 0.35s ease;
+    }
+
+    .slide.active { display: grid; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+
+    .logo {
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .slide-num {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .slide-body {
+      display: grid;
+      gap: 1.75rem;
+      align-content: center;
+      max-width: 1100px;
+    }
+
+    .slide-body.split {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      max-width: none;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    h1 span { color: var(--accent); }
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-size: 1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: rgba(245, 241, 232, 0.88);
+    }
+
+    .lead {
+      font-size: 1.25rem;
+      max-width: 52ch;
+      color: var(--muted);
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .stat-grid.two { grid-template-columns: repeat(2, 1fr); }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 4px;
+    }
+
+    .stat .num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat .label {
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .pill {
+      background: rgba(232, 61, 50, 0.12);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .feature {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 1.25rem;
+      border-radius: 4px;
+    }
+
+    .feature h4 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+
+    .feature p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .flow-arrow { color: var(--accent); font-size: 1.2rem; }
+
+    .image-placeholder {
+      background: var(--surface);
+      border: 2px dashed rgba(232, 61, 50, 0.45);
+      border-radius: 6px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .image-placeholder.tall { min-height: 340px; }
+
+    .image-placeholder .icon {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+
+    .image-placeholder strong {
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .image-placeholder span { font-size: 0.8rem; max-width: 22ch; }
+
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .compare th, .compare td {
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    .compare th {
+      background: rgba(232, 61, 50, 0.15);
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+
+    .compare td:first-child { color: var(--muted); width: 28%; }
+
+    .compare .win { color: #9ef0d0; }
+
+    .mono-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .mono-card {
+      background: var(--surface);
+      border-top: 3px solid var(--accent);
+      padding: 1.25rem;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .mono-card h4 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .mono-card p { font-size: 0.85rem; color: var(--muted); }
+    .mono-card .price { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin: 0.5rem 0; }
+
+    .citations {
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.45;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 0.75rem;
+    }
+
+    .citations a { color: var(--accent); text-decoration: none; }
+    .citations a:hover { text-decoration: underline; }
+
+    .nav {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    .nav button {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .nav button:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .progress {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+      z-index: 100;
+    }
+
+    .cover-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .cover-actions span {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 0.5rem 0;
+    }
+
+    ul.compact { list-style: none; }
+    ul.compact li {
+      padding: 0.35rem 0 0.35rem 1.2rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+    ul.compact li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    @media (max-width: 900px) {
+      .slide { padding: 2rem 1.5rem 4rem; }
+      .slide-body.split, .stat-grid, .feature-grid, .mono-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .slide { display: grid !important; page-break-after: always; height: auto; min-height: 100vh; }
+      .nav, .progress { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+
+    <!-- SLIDE 1: COVER -->
+    <section class="slide active" data-slide="1">
+      <div class="slide-header">
+        <div class="logo">Parallax</div>
+        <div class="slide-num">01 / 12</div>
+      </div>
+      <div class="slide-body split">
+        <div>
+          <p class="tagline">Investor pitch · 2026</p>
+          <h1>Talk across the <span>divide</span></h1>
+          <p class="lead" style="margin-top:1rem;">
+            Video-first conversations with people who hold opposing views — built to strengthen civic discourse and debate skills in an age of polarization.
+          </p>
+          <div class="cover-actions">
+            <span>Anonymous · Moderated · Fact-grounded</span>
+          </div>
+        </div>
+        <div class="image-placeholder tall">
+          <div class="icon">◻</div>
+          <strong>Image placeholder</strong>
+          <span>Hero screenshot — landing page with red/black Parallax branding and orbit visual</span>
+        </div>
+      </div>
+      <div class="citations">parallax.app · Confidential</div>
+    </section>
+
+    <!-- SLIDE 2: PROBLEM -->
+    <section class="slide" data-slide="2">
+      <div class="slide-header">
+        <div class="logo">The Problem</div>
+        <div class="slide-num">02 / 12</div>
+      </div>
+      <div class="slide-body">
+        <h2>Democracy is talking past itself</h2>
+        <p class="lead">Partisan hostility is at multi-decade highs. Americans increasingly view opponents as immoral, dishonest, and threatening — not as people to engage.</p>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="num">72%</div>
+            <div class="label">of Republicans view Democrats as more closed-minded than other Americans (2022)</div>
+          </div>
+          <div class="stat">
+            <div class="num">63%</div>
+            <div class="label">of Democrats say the same about Republicans</div>
+          </div>
+          <div class="stat">
+            <div class="num">27%</div>
+            <div class="label">of Americans hold unfavorable views of <em>both</em> major parties — highest in 20+ years</div>
+          </div>
+        </div>
+      </div>
+      <div class="citations">
+        Sources: Pew Research Center, <a href="https://www.pewresearch.org/politics/2022/08/09/partisan-antipathy-beyond-politics/">Partisan Antipathy Beyond Politics</a> (Aug 2022); Pew Research Center, <a href="https://www.pewresearch.org/politics/2024/04/09/the-partisanship-and-ideology-of-american-voters/">Partisanship and Ideology of American Voters</a> (Apr 2024).
+      </div>
+    </section>
+
+    <!-- SLIDE 3: WHY DEBATE SKILLS -->
+    <section class="slide" data-slide="3">
+      <div class="slide-header">
+        <div class="logo">The Rationale</div>
+        <div class="slide-num">03 / 12</div>
+      </div>
+      <div class="slide-body split">
+        <div>
+          <h2>We need spaces to practice disagreement</h2>
+          <p style="margin-bottom:1rem;">Polarization isn't only ideological — it's experiential. People avoid cross-view dialogue, and civic capacity is eroding globally.</p>
+          <div class="stat-grid two" style="margin-bottom:1rem;">
+            <div class="stat">
+              <div class="num">53%</div>
+              <div class="label">of Americans say talking politics with people they disagree with is "stressful and frustrating"</div>
+            </div>
+            <div class="stat">
+              <div class="num">64%</div>
+              <div class="label">of 8th graders across 13 countries at/above civic knowledge Level B — down from 70% in 2016</div>
+            </div>
+          </div>
+          <p><strong style="color:var(--accent)">Parallax exists to change the experience:</strong> structured, anonymous, moderated rooms where users steelman opposing views and build real debate muscle — not perform for an audience.</p>
+        </div>
+        <div class="image-placeholder">
+          <div class="icon">◻</div>
+          <strong>Image placeholder</strong>
+          <span>Split-screen photo — two people in conversation across a table, or abstract polarization graphic</span>
+        </div>
+      </div>
+      <div class="citations">
+        Sources: Pew Research Center (via Facing History, <a href="https://www.facinghistory.org/resource-library/political-polarization-united-states">Political Polarization in the United States</a>, Aug 2024); IEA/ACER, <a href="https://www.acer.org/au/news/article/citizenship-education-in-times-of-global-challenge">ICCS 2022</a>; Education Week, <a href="https://www.edweek.org/policy-politics/its-not-just-u-s-students-civics-scores-have-dropped-around-the-world/2023/11">Civics Scores Drop Globally</a> (Nov 2023).
+      </div>
+    </section>
+
+    <!-- SLIDE 4: INFORMATION CRISIS -->
+    <section class="slide" data-slide="4">
+      <div class="slide-header">
+        <div class="logo">Information Environment</div>
+        <div class="slide-num">04 / 12</div>
+      </div>
+      <div class="slide-body split">
+        <div>
+          <h2>Feeds reward outrage, not understanding</h2>
+          <p style="margin-bottom:1.25rem;">Social platforms optimize for engagement — not good-faith exchange. Users self-select into like-minded communities while struggling to verify what they read.</p>
+          <div class="stat-grid two">
+            <div class="stat">
+              <div class="num">59%</div>
+              <div class="label">globally concerned about what's real vs. fake in online news (2024)</div>
+            </div>
+            <div class="stat">
+              <div class="num">72%</div>
+              <div class="label">in the United States — during a major election year</div>
+            </div>
+          </div>
+          <p style="margin-top:1rem;font-size:0.95rem;color:var(--muted);">The Reuters Institute notes echo chambers are driven more by <em>self-selection</em> among highly partisan users than by algorithms alone — meaning intentional cross-view spaces matter.</p>
+        </div>
+        <div class="image-placeholder">
+          <div class="icon">◻</div>
+          <strong>Image placeholder</strong>
+          <span>Social media feed mockup vs. Parallax room — contrast infinite scroll with focused 1:1 dialogue</span>
+        </div>
+      </div>
+      <div class="citations">
+        Sources: Reuters Institute, <a href="https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2024/dnr-executive-summary">Digital News Report 2024</a> (YouGov, 95,000+ respondents, 47 markets); Reuters Institute, <a href="https://reutersinstitute.politics.ox.ac.uk/echo-chambers-filter-bubbles-and-polarisation-literature-review">Echo Chambers Literature Review</a> (2022).
+      </div>
+    </section>
+
+    <!-- SLIDE 5: SOLUTION -->
+    <section class="slide" data-slide="5">
+      <div class="slide-header">
+        <div class="logo">Our Solution</div>
+        <div class="slide-num">05 / 12</div>
+      </div>
+      <div class="slide-body split">
+        <div>
+          <h2>Parallax — perspective through encounter</h2>
+          <p style="margin-bottom:1rem;">Named for the shift in view when you change position. Parallax matches strangers with <strong>opposing stances</strong> on a <strong>curated topic</strong> for short, video-first conversations — Omegle's spontaneity with purpose and guardrails.</p>
+          <ul class="compact">
+            <li>10-question values survey → ideology profile (never labeled)</li>
+            <li>Topic picker → queue for ideological opposite on same issue</li>
+            <li>1:1 video + text chat with skip, report, and time limits</li>
+            <li>AI moderation + Exa-powered factual context cards</li>
+          </ul>
+          <div class="pill-row" style="margin-top:1rem;">
+            <span class="pill">Anonymous MVP</span>
+            <span class="pill">LiveKit WebRTC</span>
+            <span class="pill">AI Safety Layer</span>
+            <span class="pill">Cited Fact-Checks</span>
+          </div>
+        </div>
+        <div class="image-placeholder tall">
+          <div class="icon">◻</div>
+          <strong>Image placeholder</strong>
+          <span>Product mockup — video room with topic banner, counterview panel, and context card sidebar</span>
+        </div>
+      </div>
+      <div class="citations">Product spec: <a href="../docs/PRD.md">Parallax PRD</a> · The Inbox monorepo</div>
+    </section>
+
+    <!-- SLIDE 6: HOW IT WORKS -->
+    <section class="slide" data-slide="6">
+      <div class="slide-header">
+        <div class="logo">User Flow</div>
+        <div class="slide-num">06 / 12</div>
+      </div>
+      <div class="slide-body">
+        <h2>From values to voice in four steps</h2>
+        <div class="flow" style="margin:1rem 0 1.5rem;">
+          <div class="flow-step"><strong>1.</strong> Value Survey<br><small>10 Likert questions</small></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><strong>2.</strong> Topic Picker<br><small>Curated policy issues</small></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><strong>3.</strong> Opposite Match<br><small>~30s queue</small></div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step"><strong>4.</strong> Video Room<br><small>10–15 min session</small></div>
+        </div>
+        <div class="feature-grid">
+          <div class="feature">
+            <h4>Opposite matching, not echo matching</h4>
+            <p>Omegle pairs shared interests. Parallax pairs maximum ideological distance on the topic's primary axis.</p>
+          </div>
+          <div class="feature">
+            <h4>Icebreaker on connect</h4>
+            <p>"You were matched because you see [topic] differently. Try to understand their view first."</p>
+          </div>
+          <div class="feature">
+            <h4>Skip anytime</h4>
+            <p>Instant re-queue — low friction keeps practice sessions frequent, like sparring.</p>
+          </div>
+          <div class="feature">
+            <h4>Post-session feedback</h4>
+            <p>"Did you better understand the other side?" — tracks our core success metric.</p>
+          </div>
+        </div>
+      </div>
+      <div class="citations">Matching logic: primary-axis distance scoring with 30s timeout and adjacent-bucket fallback · PRD § User Flow</div>
+    </section>
+
+    <!-- SLIDE 7: FEATURES -->
+    <section class="slide" data-slide="7">
+      <div class="slide-header">
+        <div class="logo">Product Pillars</div>
+        <div class="slide-num">07 / 12</div>
+      </div>
+      <div class="slide-body split">
+        <div class="feature-grid">
+          <div class="feature">
+            <h3>01 · Match</h3>
+            <h4>Ideological opposites on real topics</h4>
+            <p>Eight Values–inspired survey. Topics tagged to economic, diplomatic, civil, or societal axes.</p>
+          </div>
+          <div class="feature">
+            <h3>02 · Connect</h3>
+            <h4>Video-first 1:1 rooms</h4>
+            <p>LiveKit WebRTC. Face-to-face humanizes disagreement — harder to dehumanize than text threads.</p>
+          </div>
+          <div class="feature">
+            <h3>03 · Protect</h3>
+            <h4>AI moderation stack</h4>
+            <p>Text + sampled video frames. Tiered actions: warn → end session → IP ban after 3 violations/24h.</p>
+          </div>
+          <div class="feature">
+            <h3>04 · Ground</h3>
+            <h4>Exa fact-check cards</h4>
+            <p>Verifiable claims only — neutral tone, cited sources. Opinions stay untouched; facts get context.</p>
+          </div>
+        </div>
+        <div class="image-placeholder">
+          <div class="icon">◻</div>
+          <strong>Image placeholder</strong>
+          <span>Four-panel product screenshot — survey, topic picker, queue screen, video room with context card</span>
+        </div>
+      </div>
+      <div class="citations">Stack: Vite + React 19 · Fastify + WebSocket · Redis · SQLite · OpenAI moderation · Exa retrieval · LiveKit Cloud</div>
+    </section>
+
+    <!-- SLIDE 8: DIFFERENTIATION -->
+    <section class="slide" data-slide="8">
+      <div class="slide-header">
+        <div class="logo">Why We Win</div>
+        <div class="slide-num">08 / 12</div>
+      </div>
+      <div class="slide-body">
+        <h2>Built for debate, not dopamine</h2>
+        <table class="compare" style="margin-top:1rem;">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Social feeds / forums</th>
+              <th>Random chat (Omegle-style)</th>
+              <th>Parallax</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Matching logic</td>
+              <td>Algorithmic similarity</td>
+              <td>Shared interest tags</td>
+              <td class="win">Ideological opposite on topic</td>
+            </tr>
+            <tr>
+              <td>Format</td>
+              <td>Async, performative</td>
+              <td>Random, unstructured</td>
+              <td class="win">Live video + curated frame</td>
+            </tr>
+            <tr>
+              <td>Safety</td>
+              <td>Reactive reporting</td>
+              <td>Historically weak</td>
+              <td class="win">Real-time AI + IP bans</td>
+            </tr>
+            <tr>
+              <td>Truth layer</td>
+              <td>Community notes / none</td>
+              <td>None</td>
+              <td class="win">Exa-cited context cards</td>
+            </tr>
+            <tr>
+              <td>Skill building</td>
+              <td>Pile-ons, avoidance</td>
+              <td>No learning objective</td>
+              <td class="win">Steelman prompts + feedback</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="citations">UNESCO notes education must equip citizens with "knowledge, skills and attitudes necessary for democracy" — Parallax operationalizes that in a live product. <a href="https://docs.un.org/en/A/79/344">UN General Assembly A/79/344</a> (2024).</div>
+    </section>
+
+    <!-- SLIDE 9: MARKET -->
+    <section class="slide" data-slide="9">
+      <div class="slide-header">
+        <div class="logo">Market Opportunity</div>
+        <div class="slide-num">09 / 12</div>
+      </div>
+      <div class="slide-body split">
+        <div>
+          <h2>A civic infrastructure category</h2>
+          <p style="margin-bottom:1rem;">Parallax sits at the intersection of edtech, social discovery, and civic tech — three markets responding to democratic backslide.</p>
+          <div class="stat-grid two">
+            <div class="stat">
+              <div class="num">5.23</div>
+              <div class="label">Global Democracy Index score — lowest since EIU began tracking in 2006</div>
+            </div>
+            <div class="stat">
+              <div class="num">45%</div>
+              <div class="label">of the world's population lives under some form of democracy (74 countries, 2023)</div>
+            </div>
+          </div>
+          <p style="margin-top:1rem;"><strong>Target segments:</strong></p>
+          <div class="pill-row">
+            <span class="pill">University debate societies</span>
+            <span class="pill">Civic education NGOs</span>
+            <span class="pill">News literacy programs</span>
+            <span class="pill">Gen Z discourse-curious</span>
+            <span class="pill">Corporate DEI / dialogue</span>
+          </div>
+        </div>
+        <div class="image-placeholder">
+          <div class="icon">◻</div>
+          <strong>Image placeholder</strong>
+          <span>Market map diagram — concentric circles: civic tech, edtech, social video, AI safety</span>
+        </div>
+      </div>
+      <div class="citations">
+        Source: Economist Intelligence Unit, cited in UN General Assembly report <a href="https://docs.un.org/en/A/79/344">A/79/344 — Education for Democracy</a> (2024). OECD: declining youth electoral participation and rising distrust in institutions — <a href="https://www.oecd.org/en/publications/civic-education-as-a-pathway-to-inclusive-societies_3f128be8-en.html">Civic Education as a Pathway to Inclusive Societies</a> (2025).
+      </div>
+    </section>
+
+    <!-- SLIDE 10: MONETIZATION -->
+    <section class="slide" data-slide="10">
+      <div class="slide-header">
+        <div class="logo">Monetization</div>
+        <div class="slide-num">10 / 12</div>
+      </div>
+      <div class="slide-body">
+        <h2>Free for citizens. Paid for institutions.</h2>
+        <p class="lead" style="margin-bottom:1.25rem;">Core matching stays free to maximize cross-view encounters. Revenue layers on top without compromising the public-good mission.</p>
+        <div class="mono-grid">
+          <div class="mono-card">
+            <h4>Parallax Pro</h4>
+            <div class="price">$9/mo</div>
+            <p>Extended sessions, session replay summaries, debate skill analytics, priority matching, custom topic requests.</p>
+          </div>
+          <div class="mono-card">
+            <h4>Parallax Campus</h4>
+            <div class="price">$2.5k/yr</div>
+            <p>University & high school licenses: moderated rooms, instructor dashboards, assignment modes, FERPA-compliant analytics.</p>
+          </div>
+          <div class="mono-card">
+            <h4>Parallax Enterprise</h4>
+            <div class="price">Custom</div>
+            <p>Media orgs, NGOs, and corporates: branded dialogue programs, internal policy debates, API access to anonymized discourse insights.</p>
+          </div>
+          <div class="mono-card">
+            <h4>Topic Sponsorship</h4>
+            <div class="price">$5–15k</div>
+            <p>Foundations and think tanks sponsor curated topic packs with neutral Exa-generated primers — disclosed, non-partisan.</p>
+          </div>
+          <div class="mono-card">
+            <h4>API & Data (B2B)</h4>
+            <div class="price">Usage-based</div>
+            <p>Aggregated, anonymized sentiment and claim-verification feeds for researchers, pollsters, and newsrooms.</p>
+          </div>
+          <div class="mono-card">
+            <h4>Premium Safety</h4>
+            <div class="price">$0.02/min</div>
+            <p>White-label moderation + fact-check pipeline licensed to other live-video platforms (LiveKit ecosystem play).</p>
+          </div>
+        </div>
+      </div>
+      <div class="citations">Unit economics target: &lt;$0.08/session at scale (LiveKit + OpenAI + Exa) · LTV driven by institutional contracts and Pro conversion on power users</div>
+    </section>
+
+    <!-- SLIDE 11: ROADMAP -->
+    <section class="slide" data-slide="11">
+      <div class="slide-header">
+        <div class="logo">Roadmap & Metrics</div>
+        <div class="slide-num">11 / 12</div>
+      </div>
+      <div class="slide-body split">
+        <div>
+          <h2>MVP live → campus pilots → platform</h2>
+          <ul class="compact" style="margin-bottom:1.25rem;">
+            <li><strong>Phase 0–1 (Now):</strong> Survey → match → video room. Demo mode without LiveKit credentials.</li>
+            <li><strong>Phase 2:</strong> Full AI moderation + IP ban enforcement.</li>
+            <li><strong>Phase 3:</strong> Exa fact-check pipeline + context cards in sidebar.</li>
+            <li><strong>Phase 4:</strong> Campus pilot with 3 universities. Design reskin.</li>
+            <li><strong>2027:</strong> Mobile apps, topic briefs, post-session digests, human review queue.</li>
+          </ul>
+          <h3>North-star metrics</h3>
+          <div class="pill-row">
+            <span class="pill">Match rate &lt;30s</span>
+            <span class="pill">Session &gt;3 min</span>
+            <span class="pill">"Understood other side" score</span>
+            <span class="pill">Fact-check engagement</span>
+            <span class="pill">Moderation precision</span>
+          </div>
+        </div>
+        <div class="image-placeholder">
+          <div class="icon">◻</div>
+          <strong>Image placeholder</strong>
+          <span>Roadmap timeline graphic or traction dashboard mockup with key metrics</span>
+        </div>
+      </div>
+      <div class="citations">Implementation phases per PRD · Success metrics: match rate, session completion, moderation precision, fact-check engagement, understanding delta</div>
+    </section>
+
+    <!-- SLIDE 12: CLOSE -->
+    <section class="slide" data-slide="12">
+      <div class="slide-header">
+        <div class="logo">The Ask</div>
+        <div class="slide-num">12 / 12</div>
+      </div>
+      <div class="slide-body split">
+        <div>
+          <h2>Fund the room where democracy practices</h2>
+          <p style="margin:1rem 0;">We're raising to scale matching infrastructure, harden moderation, and launch campus pilots — turning Parallax from a working MVP into the default place to disagree well.</p>
+          <div class="stat-grid two">
+            <div class="stat">
+              <div class="num">$750k</div>
+              <div class="label">Pre-seed target · 18-month runway</div>
+            </div>
+            <div class="stat">
+              <div class="num">40%</div>
+              <div class="label">Engineering · 25% GTM/campus · 20% moderation/AI · 15% ops/legal</div>
+            </div>
+          </div>
+          <p style="margin-top:1.5rem;font-size:1.2rem;">
+            <span style="color:var(--accent)">Parallax</span> — shift your perspective.
+          </p>
+          <p style="margin-top:0.5rem;color:var(--muted);font-size:0.95rem;">[Founder name] · [email] · [website]</p>
+        </div>
+        <div class="image-placeholder tall">
+          <div class="icon">◻</div>
+          <strong>Image placeholder</strong>
+          <span>Team photo or founder headshot on dark background with red accent lighting</span>
+        </div>
+      </div>
+      <div class="citations">
+        "Talk with someone who sees the world differently." · Built with LiveKit, Exa, OpenAI · <a href="http://localhost:5173">localhost:5173</a> (dev)
+      </div>
+    </section>
+
+  </div>
+
+  <div class="progress" id="progress"></div>
+  <nav class="nav" aria-label="Slide navigation">
+    <button id="prev" aria-label="Previous slide">←</button>
+    <button id="next" aria-label="Next slide">→</button>
+  </nav>
+
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    let current = 0;
+
+    function show(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((s, i) => s.classList.toggle("active", i === current));
+      document.getElementById("progress").style.width =
+        ((current + 1) / slides.length * 100) + "%";
+      slides.forEach((s, i) => {
+        const num = s.querySelector(".slide-num");
+        if (num) num.textContent = String(i + 1).padStart(2, "0") + " / " + slides.length;
+      });
+    }
+
+    document.getElementById("prev").addEventListener("click", () => show(current - 1));
+    document.getElementById("next").addEventListener("click", () => show(current + 1));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); show(current + 1); }
+      if (e.key === "ArrowLeft") show(current - 1);
+      if (e.key === "Home") show(0);
+      if (e.key === "End") show(slides.length - 1);
+    });
+
+    show(0);
+  </script>
+</body>
+</html>

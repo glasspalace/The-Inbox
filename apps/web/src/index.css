@@ -215,8 +215,8 @@ input {
 }
 
 .hero-copy h1 {
-  font-size: clamp(5.5rem, 17vw, 18rem);
-  line-height: 0.72;
+  font-size: clamp(4.5rem, 10vw, 10rem);
+  line-height: 0.86;
   font-style: italic;
 }
 
@@ -367,39 +367,6 @@ input {
   width: 17rem;
   height: 17rem;
   animation-delay: -4.2s;
-}
-
-.giant-word {
-  position: absolute;
-  left: -1vw;
-  bottom: -2.2rem;
-  z-index: 1;
-  color: var(--color-text);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(7rem, 20vw, 24rem);
-  font-style: italic;
-  line-height: 0.72;
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-.ticker {
-  display: flex;
-  gap: 2rem;
-  overflow: hidden;
-  border-block: 1px solid rgba(245, 241, 232, 0.7);
-  background: var(--color-text);
-  color: var(--color-ink);
-}
-
-.ticker span {
-  flex: 0 0 auto;
-  padding: 0.5rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: clamp(1rem, 2.8vw, 2.4rem);
-  font-weight: 1000;
-  animation: ticker 16s linear infinite;
 }
 
 .process-section,
@@ -769,12 +736,6 @@ input {
   }
   50% {
     transform: translate3d(0.7rem, -1rem, 0);
-  }
-}
-
-@keyframes ticker {
-  to {
-    transform: translateX(-100%);
   }
 }
 

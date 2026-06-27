@@ -1,0 +1,184 @@
+{"kind":"deck","id":"pr/fy64gu","name":"Deck"}
+{"kind":"layout","layoutId":"d0f7779d-e0b7-4606-97d2-cb8a210a8ca3","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"1218c87c-c9a6-4b8f-b5cf-ed3a716ae39e","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/w1gl5c","slide":1,"title":"Parallax","textShapes":4}
+{"kind":"shape","id":"sh/j6tovaho","slide":1,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/crmhk3q5","slide":1,"bbox":[0,0,360,720]}
+{"kind":"textbox","id":"sh/1cfa9w3m","slide":1,"text":"Parallax","textPreview":"Parallax","textChars":8,"textLines":1,"bbox":[64,96,740,120]}
+{"kind":"textbox","id":"sh/uxc3ylc7","slide":1,"text":"A moderated video platform for productive disagreement","textPreview":"A moderated video platform for productive disagreement","textChars":54,"textLines":1,"bbox":[68,232,760,60]}
+{"kind":"textbox","id":"sh/ji5snelo","slide":1,"text":"Pitch deck","textPreview":"Pitch deck","textChars":10,"textLines":1,"bbox":[70,596,280,34]}
+{"kind":"shape","id":"sh/c3ylc7u5","slide":1,"bbox":[790,78,390,520]}
+{"kind":"shape","id":"sh/1kre1w7m","slide":1,"bbox":[804,92,362,492]}
+{"kind":"textbox","id":"sh/q5o7qpg3","slide":1,"text":"HERO PRODUCT IMAGE","textPreview":"HERO PRODUCT IMAGE","textChars":18,"textLines":1,"bbox":[818,320,334,40]}
+{"kind":"notes","id":"nt/w1gl5c","slide":1,"text":""}
+{"kind":"slide","id":"sl/jwp26k","slide":2,"title":"WHY NOW","textShapes":12}
+{"kind":"shape","id":"sh/47y1kre1","slide":2,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/bm58z25k","slide":2,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/m1cfa9w3","slide":2,"text":"WHY NOW","textPreview":"WHY NOW","textChars":7,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/tgfmlkjm","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/4vmtwra5","slide":2,"text":"The public square is high-friction and low-trust.","textPreview":"The public square is high-friction and low-trust.","textChars":49,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"textbox","id":"sh/bat47y1k","slide":2,"text":"72%","textPreview":"72%","textChars":3,"textLines":1,"bbox":[76,222,320,70]}
+{"kind":"textbox","id":"sh/mp0bi9s3","slide":2,"text":"of Republicans said Democrats are more immoral than other Americans in Pew's 2022 study.","textPreview":"of Republicans said Democrats are more immoral than other Americans in Pew's 2022 study.","textChars":88,"textLines":1,"bbox":[76,294,320,76]}
+{"kind":"textbox","id":"sh/t83itgfm","slide":2,"text":"63%","textPreview":"63%","textChars":3,"textLines":1,"bbox":[424,222,320,70]}
+{"kind":"textbox","id":"sh/4nap4r65","slide":2,"text":"of Democrats said Republicans are more immoral than other Americans in the same study.","textPreview":"of Democrats said Republicans are more immoral than other Americans in the same study.","textChars":86,"textLines":1,"bbox":[424,294,320,76]}
+{"kind":"textbox","id":"sh/u9knih4b","slide":2,"text":"31%","textPreview":"31%","textChars":3,"textLines":1,"bbox":[772,222,330,70]}
+{"kind":"textbox","id":"sh/judg7ads","slide":2,"text":"of U.S. adults said they trust mass media a great deal or fair amount, Gallup reported in 2024.","textPreview":"of U.S. adults said they trust mass media a great deal or fair amount, Gallup reported in 2024.","textChars":95,"textLines":1,"bbox":[772,294,330,76]}
+{"kind":"shape","id":"sh/cfa9w3m9","slide":2,"bbox":[822,422,310,160]}
+{"kind":"shape","id":"sh/1032lszq","slide":2,"bbox":[836,436,282,132]}
+{"kind":"textbox","id":"sh/u18jqh0f","slide":2,"text":"CHART OR NEWS COLLAGE","textPreview":"CHART OR NEWS COLLAGE","textChars":21,"textLines":1,"bbox":[850,484,254,40]}
+{"kind":"textbox","id":"sh/jm1cfa9w","slide":2,"text":"Existing feeds reward speed, performance, and certainty. Parallax is built for the missing opposite: time-bounded, moderated, human exchange.","textPreview":"Existing feeds reward speed, performance, and certainty. Parallax is built for the missing opposite: time-bounded, moderated, human excha...","textChars":141,"textLines":1,"bbox":[76,454,680,104]}
+{"kind":"textbox","id":"sh/c7u54zid","slide":2,"text":"Sources: Pew Research Center, 2022; Gallup, 2024.","textPreview":"Sources: Pew Research Center, 2022; Gallup, 2024.","textChars":49,"textLines":1,"bbox":[64,672,1100,24]}
+{"kind":"notes","id":"nt/jwp26k","slide":2,"text":""}
+{"kind":"slide","id":"sl/dlrcxg","slide":3,"title":"RATIONALE","textShapes":9}
+{"kind":"shape","id":"sh/0nuxc3yl","slide":3,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/72x4nap4","slide":3,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":3,"text":"RATIONALE","textPreview":"RATIONALE","textChars":9,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/pkzupwb2","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/0z61032l","slide":3,"text":"Rationale: make disagreement useful again.","textPreview":"Rationale: make disagreement useful again.","textChars":42,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"shape","id":"sh/7ed8bat4","slide":3,"bbox":[86,228,10,10]}
+{"kind":"textbox","id":"sh/itgfmlkj","slide":3,"text":"Host real conversations where people test ideas instead of performing identity.","textPreview":"Host real conversations where people test ideas instead of performing identity.","textChars":79,"textLines":1,"bbox":[114,220,582,74]}
+{"kind":"shape","id":"sh/pwb2hwfy","slide":3,"bbox":[86,310,10,10]}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":3,"text":"Build debate skills: listening, framing, evidence, rebuttal, and respectful exits.","textPreview":"Build debate skills: listening, framing, evidence, rebuttal, and respectful exits.","textChars":82,"textLines":1,"bbox":[114,302,582,74]}
+{"kind":"shape","id":"sh/u18jqh0f","slide":3,"bbox":[86,392,10,10]}
+{"kind":"textbox","id":"sh/jm1cfa9w","slide":3,"text":"Create a civic learning loop for an increasingly polarised society.","textPreview":"Create a civic learning loop for an increasingly polarised society.","textChars":67,"textLines":1,"bbox":[114,384,582,74]}
+{"kind":"shape","id":"sh/c7u54zid","slide":3,"bbox":[760,190,350,330]}
+{"kind":"textbox","id":"sh/1orytsvu","slide":3,"text":"Core belief","textPreview":"Core belief","textChars":11,"textLines":1,"bbox":[796,228,260,34]}
+{"kind":"textbox","id":"sh/u9knih4b","slide":3,"text":"People do not need another comment section. They need a room, a counterview, and enough context to stay honest.","textPreview":"People do not need another comment section. They need a room, a counterview, and enough context to stay honest.","textChars":111,"textLines":1,"bbox":[796,286,270,168]}
+{"kind":"textbox","id":"sh/judg7ads","slide":3,"text":"Context: U.S. Surgeon General Advisory on Social Connection, 2023; Parallax product rationale.","textPreview":"Context: U.S. Surgeon General Advisory on Social Connection, 2023; Parallax product rationale.","textChars":94,"textLines":1,"bbox":[64,672,1100,24]}
+{"kind":"notes","id":"nt/dlrcxg","slide":3,"text":""}
+{"kind":"slide","id":"sl/nyjm8u","slide":4,"title":"PRODUCT","textShapes":16}
+{"kind":"shape","id":"sh/fepkzupw","slide":4,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/4zidonyd","slide":4,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/xkf6dcbu","slide":4,"text":"PRODUCT","textPreview":"PRODUCT","textChars":7,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/mlkjm1cf","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/f6dcbulw","slide":4,"text":"How Parallax works.","textPreview":"How Parallax works.","textChars":19,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"shape","id":"sh/4r65wjud","slide":4,"bbox":[72,214,246,270]}
+{"kind":"textbox","id":"sh/xc3ylc7u","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[94,238,64,50]}
+{"kind":"textbox","id":"sh/m94fu18j","slide":4,"text":"Answer a short values scan","textPreview":"Answer a short values scan","textChars":26,"textLines":1,"bbox":[94,306,194,62]}
+{"kind":"textbox","id":"sh/fu18jqh0","slide":4,"text":"The app builds a lightweight signal for matching and prompts.","textPreview":"The app builds a lightweight signal for matching and prompts.","textChars":61,"textLines":1,"bbox":[94,392,190,78]}
+{"kind":"shape","id":"sh/r65wjudg","slide":4,"bbox":[364,214,246,270]}
+{"kind":"textbox","id":"sh/ylc7u54z","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[386,238,64,50]}
+{"kind":"textbox","id":"sh/9cvixcze","slide":4,"text":"Choose a live tension","textPreview":"Choose a live tension","textChars":21,"textLines":1,"bbox":[386,306,194,62]}
+{"kind":"textbox","id":"sh/gr2p8nqx","slide":4,"text":"Users pick the question they actually want to sit inside.","textPreview":"Users pick the question they actually want to sit inside.","textChars":57,"textLines":1,"bbox":[386,392,190,78]}
+{"kind":"shape","id":"sh/nih4byhg","slide":4,"bbox":[656,214,246,270]}
+{"kind":"textbox","id":"sh/yxobm58z","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[678,238,64,50]}
+{"kind":"textbox","id":"sh/5o7qpg3e","slide":4,"text":"Enter a moderated room","textPreview":"Enter a moderated room","textChars":22,"textLines":1,"bbox":[678,306,194,62]}
+{"kind":"textbox","id":"sh/g3ex0nux","slide":4,"text":"Video opens with context cards, safety controls, and exit paths.","textPreview":"Video opens with context cards, safety controls, and exit paths.","textChars":64,"textLines":1,"bbox":[678,392,190,78]}
+{"kind":"shape","id":"sh/rmhk3q5o","slide":4,"bbox":[948,214,246,270]}
+{"kind":"textbox","id":"sh/y1kre1w7","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[970,238,64,50]}
+{"kind":"textbox","id":"sh/6dcbulwv","slide":4,"text":"Reflect and improve","textPreview":"Reflect and improve","textChars":19,"textLines":1,"bbox":[970,306,194,62]}
+{"kind":"textbox","id":"sh/vy90je9c","slide":4,"text":"Post-room prompts turn conversation into debate-skill growth.","textPreview":"Post-room prompts turn conversation into debate-skill growth.","textChars":61,"textLines":1,"bbox":[970,392,190,78]}
+{"kind":"shape","id":"sh/oj2t83it","slide":4,"bbox":[880,520,254,96]}
+{"kind":"shape","id":"sh/d4vmtwra","slide":4,"bbox":[894,534,226,68]}
+{"kind":"textbox","id":"sh/61032lsz","slide":4,"text":"APP SCREENSHOT","textPreview":"APP SCREENSHOT","textChars":14,"textLines":1,"bbox":[908,550,198,40]}
+{"kind":"notes","id":"nt/nyjm8u","slide":4,"text":""}
+{"kind":"slide","id":"sl/f8a0e5","slide":5,"title":"TRUST & SAFETY","textShapes":9}
+{"kind":"shape","id":"sh/xs72x4na","slide":5,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/q1orytsv","slide":5,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/fmlkjm1c","slide":5,"text":"TRUST & SAFETY","textPreview":"TRUST & SAFETY","textChars":14,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/8z25kb6x","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/1gvy90je","slide":5,"text":"Designed for honesty without chaos.","textPreview":"Designed for honesty without chaos.","textChars":35,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"shape","id":"sh/qtcj6tov","slide":5,"bbox":[80,214,10,10]}
+{"kind":"textbox","id":"sh/je9cvixc","slide":5,"text":"Anonymous-by-default rooms reduce status games while preserving reporting and escalation.","textPreview":"Anonymous-by-default rooms reduce status games while preserving reporting and escalation.","textChars":89,"textLines":1,"bbox":[108,206,622,62]}
+{"kind":"shape","id":"sh/8v6psfil","slide":5,"bbox":[80,284,10,10]}
+{"kind":"textbox","id":"sh/xczed8v6","slide":5,"text":"Moderation layer: topic boundaries, abuse detection, room controls, and visible exits.","textPreview":"Moderation layer: topic boundaries, abuse detection, room controls, and visible exits.","textChars":86,"textLines":1,"bbox":[108,276,622,62]}
+{"kind":"shape","id":"sh/donyd0z6","slide":5,"bbox":[80,354,10,10]}
+{"kind":"textbox","id":"sh/k3q5o7qp","slide":5,"text":"Context cards bring factual grounding into the conversation without pretending to referee truth perfectly.","textPreview":"Context cards bring factual grounding into the conversation without pretending to referee truth perfectly.","textChars":106,"textLines":1,"bbox":[108,346,622,62]}
+{"kind":"shape","id":"sh/vixczed8","slide":5,"bbox":[80,424,10,10]}
+{"kind":"textbox","id":"sh/2x4nap4r","slide":5,"text":"Structured prompts help users practice claims, evidence, steelmanning, and rebuttal.","textPreview":"Structured prompts help users practice claims, evidence, steelmanning, and rebuttal.","textChars":84,"textLines":1,"bbox":[108,416,622,62]}
+{"kind":"shape","id":"sh/dcbulwva","slide":5,"bbox":[800,204,340,300]}
+{"kind":"shape","id":"sh/kre1w7mp","slide":5,"bbox":[814,218,312,272]}
+{"kind":"textbox","id":"sh/val87ed8","slide":5,"text":"SAFETY FLOW IMAGE","textPreview":"SAFETY FLOW IMAGE","textChars":17,"textLines":1,"bbox":[828,336,284,40]}
+{"kind":"textbox","id":"sh/6psfil0r","slide":5,"text":"Principle: lower the social cost of being curious; raise the cost of bad-faith behavior.","textPreview":"Principle: lower the social cost of being curious; raise the cost of bad-faith behavior.","textChars":88,"textLines":1,"bbox":[800,538,340,62]}
+{"kind":"notes","id":"nt/f8a0e5","slide":5,"text":""}
+{"kind":"slide","id":"sl/9oya1j","slide":6,"title":"SKILL GAP","textShapes":11}
+{"kind":"shape","id":"sh/hoza1gvy","slide":6,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/a1gvy90j","slide":6,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/zidonyd0","slide":6,"text":"SKILL GAP","textPreview":"SKILL GAP","textChars":9,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/svu9knih","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/hgn29gr2","slide":6,"text":"The skill stack is becoming more valuable.","textPreview":"The skill stack is becoming more valuable.","textChars":42,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"textbox","id":"sh/ap4r65wj","slide":6,"text":"70%","textPreview":"70%","textChars":3,"textLines":1,"bbox":[80,218,300,70]}
+{"kind":"textbox","id":"sh/za1gvy90","slide":6,"text":"of employers expect analytical thinking to be a core skill by 2030, according to WEF.","textPreview":"of employers expect analytical thinking to be a core skill by 2030, according to WEF.","textChars":85,"textLines":1,"bbox":[80,290,300,76]}
+{"kind":"textbox","id":"sh/sji5snel","slide":6,"text":"67%","textPreview":"67%","textChars":3,"textLines":1,"bbox":[416,218,300,70]}
+{"kind":"textbox","id":"sh/h4byhgn2","slide":6,"text":"expect resilience, flexibility, and agility to be core skills by 2030.","textPreview":"expect resilience, flexibility, and agility to be core skills by 2030.","textChars":70,"textLines":1,"bbox":[416,290,300,76]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":6,"text":"96%","textPreview":"96%","textChars":3,"textLines":1,"bbox":[752,218,330,70]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":6,"text":"of AAC&U employer respondents rated critical thinking as very or somewhat important.","textPreview":"of AAC&U employer respondents rated critical thinking as very or somewhat important.","textChars":84,"textLines":1,"bbox":[752,290,330,76]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":6,"text":"Parallax turns debate from a one-off performance into a repeatable practice loop: prepare, converse, reflect, improve.","textPreview":"Parallax turns debate from a one-off performance into a repeatable practice loop: prepare, converse, reflect, improve.","textChars":118,"textLines":1,"bbox":[96,484,940,72]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":6,"text":"Sources: World Economic Forum, Future of Jobs Report 2025; AAC&U employer survey, 2023.","textPreview":"Sources: World Economic Forum, Future of Jobs Report 2025; AAC&U employer survey, 2023.","textChars":87,"textLines":1,"bbox":[64,672,1100,24]}
+{"kind":"notes","id":"nt/9oya1j","slide":6,"text":""}
+{"kind":"slide","id":"sl/rf7rld","slide":7,"title":"BUSINESS MODEL","textShapes":12}
+{"kind":"shape","id":"sh/tovahoza","slide":7,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/ixczed8v","slide":7,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/bi9s36hc","slide":7,"text":"BUSINESS MODEL","textPreview":"BUSINESS MODEL","textChars":14,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/0fepkzup","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/p0bi9s36","slide":7,"text":"Monetisation: recurring, mission-aligned revenue.","textPreview":"Monetisation: recurring, mission-aligned revenue.","textChars":49,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"shape","id":"sh/i9s36hcr","slide":7,"bbox":[78,196,1030,72]}
+{"kind":"textbox","id":"sh/bulwval8","slide":7,"text":"Consumer Plus","textPreview":"Consumer Plus","textChars":13,"textLines":1,"bbox":[108,211,260,34]}
+{"kind":"textbox","id":"sh/0je9cvix","slide":7,"text":"Premium rooms, advanced skill reports, custom topic tracks.","textPreview":"Premium rooms, advanced skill reports, custom topic tracks.","textChars":59,"textLines":1,"bbox":[396,213,660,34]}
+{"kind":"shape","id":"sh/t47y1kre","slide":7,"bbox":[78,288,1030,72]}
+{"kind":"textbox","id":"sh/9s36hcrm","slide":7,"text":"Campus / school licenses","textPreview":"Campus / school licenses","textChars":24,"textLines":1,"bbox":[108,303,260,34]}
+{"kind":"textbox","id":"sh/g7adsji5","slide":7,"text":"Cohorts, educator dashboards, debate-club programming, civic learning pilots.","textPreview":"Cohorts, educator dashboards, debate-club programming, civic learning pilots.","textChars":77,"textLines":1,"bbox":[396,305,660,34]}
+{"kind":"shape","id":"sh/rmhk3q5o","slide":7,"bbox":[78,380,1030,72]}
+{"kind":"textbox","id":"sh/y1kre1w7","slide":7,"text":"Civic & media partners","textPreview":"Civic & media partners","textChars":22,"textLines":1,"bbox":[108,395,260,34]}
+{"kind":"textbox","id":"sh/90je9cvi","slide":7,"text":"Hosted issue rooms around elections, local policy, journalism, and community forums.","textPreview":"Hosted issue rooms around elections, local policy, journalism, and community forums.","textChars":84,"textLines":1,"bbox":[396,397,660,34]}
+{"kind":"shape","id":"sh/gfmlkjm1","slide":7,"bbox":[78,472,1030,72]}
+{"kind":"textbox","id":"sh/rytsvu9k","slide":7,"text":"Enterprise L&D","textPreview":"Enterprise L&D","textChars":14,"textLines":1,"bbox":[108,487,260,34]}
+{"kind":"textbox","id":"sh/yd0z6103","slide":7,"text":"Practice difficult conversations: feedback, negotiation, leadership, and inclusion topics.","textPreview":"Practice difficult conversations: feedback, negotiation, leadership, and inclusion topics.","textChars":90,"textLines":1,"bbox":[396,489,660,34]}
+{"kind":"textbox","id":"sh/9cvixcze","slide":7,"text":"Privacy-preserving analytics only: aggregate learning signals, never raw private conversations as a data product.","textPreview":"Privacy-preserving analytics only: aggregate learning signals, never raw private conversations as a data product.","textChars":113,"textLines":1,"bbox":[88,590,960,42]}
+{"kind":"notes","id":"nt/rf7rld","slide":7,"text":""}
+{"kind":"slide","id":"sl/2zqat8","slide":8,"title":"GO TO MARKET","textShapes":8}
+{"kind":"shape","id":"sh/g7adsji5","slide":8,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/rmhk3q5o","slide":8,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/y1kre1w7","slide":8,"text":"GO TO MARKET","textPreview":"GO TO MARKET","textChars":12,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/90je9cvi","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/gfmlkjm1","slide":8,"text":"Start with communities that already need better discourse.","textPreview":"Start with communities that already need better discourse.","textChars":58,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"shape","id":"sh/rytsvu9k","slide":8,"bbox":[76,222,10,10]}
+{"kind":"textbox","id":"sh/yd0z6103","slide":8,"text":"Launch pilots with universities, debate societies, civics teachers, and youth leadership programs.","textPreview":"Launch pilots with universities, debate societies, civics teachers, and youth leadership programs.","textChars":98,"textLines":1,"bbox":[104,214,592,74]}
+{"kind":"shape","id":"sh/9cvixcze","slide":8,"bbox":[76,304,10,10]}
+{"kind":"textbox","id":"sh/gr2p8nqx","slide":8,"text":"Partner with local newsrooms and civic nonprofits around high-salience public questions.","textPreview":"Partner with local newsrooms and civic nonprofits around high-salience public questions.","textChars":88,"textLines":1,"bbox":[104,296,592,74]}
+{"kind":"shape","id":"sh/ahoza1gv","slide":8,"bbox":[76,386,10,10]}
+{"kind":"textbox","id":"sh/32lszqtc","slide":8,"text":"Use hosted rooms, facilitator toolkits, and creator-led issue nights to seed repeat behavior.","textPreview":"Use hosted rooms, facilitator toolkits, and creator-led issue nights to seed repeat behavior.","textChars":93,"textLines":1,"bbox":[104,378,592,74]}
+{"kind":"shape","id":"sh/sneloj2t","slide":8,"bbox":[790,190,360,330]}
+{"kind":"shape","id":"sh/l87ed8ba","slide":8,"bbox":[804,204,332,302]}
+{"kind":"textbox","id":"sh/at47y1kr","slide":8,"text":"COMMUNITY / CAMPUS IMAGE","textPreview":"COMMUNITY / CAMPUS IMAGE","textChars":24,"textLines":1,"bbox":[818,337,304,40]}
+{"kind":"textbox","id":"sh/3ex0nuxc","slide":8,"text":"Early traction metric: completed rooms + repeat participation + self-reported confidence in disagreement.","textPreview":"Early traction metric: completed rooms + repeat participation + self-reported confidence in disagreement.","textChars":105,"textLines":1,"bbox":[790,554,360,58]}
+{"kind":"notes","id":"nt/2zqat8","slide":8,"text":""}
+{"kind":"slide","id":"sl/pj2314","slide":9,"title":"ROADMAP","textShapes":10}
+{"kind":"shape","id":"sh/mlkjm1cf","slide":9,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/xc3ylc7u","slide":9,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/4r65wjud","slide":9,"text":"ROADMAP","textPreview":"ROADMAP","textChars":7,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/fepkzupw","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/mtwra5gb","slide":9,"text":"Roadmap and ask.","textPreview":"Roadmap and ask.","textChars":16,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"shape","id":"sh/xkf6dcbu","slide":9,"bbox":[82,224,300,230]}
+{"kind":"textbox","id":"sh/4zidonyd","slide":9,"text":"Now","textPreview":"Now","textChars":3,"textLines":1,"bbox":[110,254,220,36]}
+{"kind":"textbox","id":"sh/fil0rqd4","slide":9,"text":"Web MVP, topic selection, matching, LiveKit rooms, context cards.","textPreview":"Web MVP, topic selection, matching, LiveKit rooms, context cards.","textChars":65,"textLines":1,"bbox":[110,320,230,96]}
+{"kind":"shape","id":"sh/qxs72x4n","slide":9,"bbox":[432,224,300,230]}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":9,"text":"Next","textPreview":"Next","textChars":4,"textLines":1,"bbox":[460,254,220,36]}
+{"kind":"textbox","id":"sh/pwb2hwfy","slide":9,"text":"Skill scoring, facilitator tools, richer moderation, post-room reflection.","textPreview":"Skill scoring, facilitator tools, richer moderation, post-room reflection.","textChars":74,"textLines":1,"bbox":[460,320,230,96]}
+{"kind":"shape","id":"sh/i5sneloj","slide":9,"bbox":[782,224,300,230]}
+{"kind":"textbox","id":"sh/7qpg3ex0","slide":9,"text":"Pilot ask","textPreview":"Pilot ask","textChars":9,"textLines":1,"bbox":[810,254,220,36]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":9,"text":"3-5 launch partners for structured debate cohorts and issue-room programming.","textPreview":"3-5 launch partners for structured debate cohorts and issue-room programming.","textChars":77,"textLines":1,"bbox":[810,320,230,96]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":9,"text":"Parallax is a product bet on a simple cultural need: people want better arguments, but need a safer room to practice them.","textPreview":"Parallax is a product bet on a simple cultural need: people want better arguments, but need a safer room to practice them.","textChars":122,"textLines":1,"bbox":[84,548,940,60]}
+{"kind":"notes","id":"nt/pj2314","slide":9,"text":""}
+{"kind":"slide","id":"sl/0bku5o","slide":10,"title":"SOURCES","textShapes":11}
+{"kind":"shape","id":"sh/0z61032l","slide":10,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/7ed8bat4","slide":10,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/itgfmlkj","slide":10,"text":"SOURCES","textPreview":"SOURCES","textChars":7,"textLines":1,"bbox":[64,34,440,24]}
+{"kind":"textbox","id":"sh/p8nqxs72","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1168,34,48,24]}
+{"kind":"textbox","id":"sh/0nuxc3yl","slide":10,"text":"Sources and image placeholders.","textPreview":"Sources and image placeholders.","textChars":31,"textLines":1,"bbox":[64,78,760,92]}
+{"kind":"textbox","id":"sh/72x4nap4","slide":10,"text":"Statistics used in this deck","textPreview":"Statistics used in this deck","textChars":28,"textLines":1,"bbox":[78,196,420,34]}
+{"kind":"shape","id":"sh/ih4byhgn","slide":10,"bbox":[82,260,10,10]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":10,"text":"Pew Research Center, \"As Partisan Hostility Grows...\", 2022.","textPreview":"Pew Research Center, \"As Partisan Hostility Grows...\", 2022.","textChars":60,"textLines":1,"bbox":[110,252,592,46]}
+{"kind":"shape","id":"sh/wjudg7ad","slide":10,"bbox":[82,314,10,10]}
+{"kind":"textbox","id":"sh/6tovahoz","slide":10,"text":"Gallup, \"Americans' Trust in Media Remains at Trend Low\", 2024.","textPreview":"Gallup, \"Americans' Trust in Media Remains at Trend Low\", 2024.","textChars":63,"textLines":1,"bbox":[110,306,592,46]}
+{"kind":"shape","id":"sh/vahoza1g","slide":10,"bbox":[82,368,10,10]}
+{"kind":"textbox","id":"sh/ovahoza1","slide":10,"text":"U.S. Surgeon General, \"Our Epidemic of Loneliness and Isolation\", 2023.","textPreview":"U.S. Surgeon General, \"Our Epidemic of Loneliness and Isolation\", 2023.","textChars":71,"textLines":1,"bbox":[110,360,592,46]}
+{"kind":"shape","id":"sh/dg7adsji","slide":10,"bbox":[82,422,10,10]}
+{"kind":"textbox","id":"sh/6hcrmhk3","slide":10,"text":"World Economic Forum, Future of Jobs Report 2025.","textPreview":"World Economic Forum, Future of Jobs Report 2025.","textChars":49,"textLines":1,"bbox":[110,414,592,46]}
+{"kind":"shape","id":"sh/z25kb6xk","slide":10,"bbox":[82,476,10,10]}
+{"kind":"textbox","id":"sh/onyd0z61","slide":10,"text":"AAC&U employer survey on critical thinking and communication, 2023.","textPreview":"AAC&U employer survey on critical thinking and communication, 2023.","textChars":67,"textLines":1,"bbox":[110,468,592,46]}
+{"kind":"shape","id":"sh/d8v6psfi","slide":10,"bbox":[780,198,340,250]}
+{"kind":"shape","id":"sh/6dcbulwv","slide":10,"bbox":[794,212,312,222]}
+{"kind":"textbox","id":"sh/vy90je9c","slide":10,"text":"REPLACE WITH FINAL VISUALS","textPreview":"REPLACE WITH FINAL VISUALS","textChars":26,"textLines":1,"bbox":[808,305,284,40]}
+{"kind":"textbox","id":"sh/rmhk3q5o","slide":10,"text":"Image placeholders are intentionally editable frames for product screenshots, user research photos, campus/community imagery, or press-style visuals.","textPreview":"Image placeholders are intentionally editable frames for product screenshots, user research photos, campus/community imagery, or press-st...","textChars":149,"textLines":1,"bbox":[780,488,340,86]}
+{"kind":"notes","id":"nt/0bku5o","slide":10,"text":""}

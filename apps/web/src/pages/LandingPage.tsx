@@ -59,15 +59,7 @@ export function LandingPage() {
           ))}
         </div>
 
-        <div className="giant-word" aria-hidden="true">Enter</div>
       </section>
-
-      <div className="ticker" aria-hidden="true">
-        <span>Ask better questions</span>
-        <span>Hold the room</span>
-        <span>Meet the counterview</span>
-        <span>Ask better questions</span>
-      </div>
 
       <section className="process-section" id="questions">
         <div className="section-heading">
