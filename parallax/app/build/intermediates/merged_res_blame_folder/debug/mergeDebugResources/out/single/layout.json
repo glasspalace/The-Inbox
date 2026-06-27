@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.electroscan.app-mergeDebugResources-3:/layout/item_project_card.xml",
+        "source": "com.electroscan.app-main-6:/layout/item_project_card.xml"
+    },
+    {
+        "merged": "com.electroscan.app-mergeDebugResources-3:/layout/activity_main.xml",
+        "source": "com.electroscan.app-main-6:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.electroscan.app-mergeDebugResources-3:/layout/activity_results.xml",
+        "source": "com.electroscan.app-main-6:/layout/activity_results.xml"
+    },
+    {
+        "merged": "com.electroscan.app-mergeDebugResources-3:/layout/activity_project_detail.xml",
+        "source": "com.electroscan.app-main-6:/layout/activity_project_detail.xml"
+    },
+    {
+        "merged": "com.electroscan.app-mergeDebugResources-3:/layout/item_step.xml",
+        "source": "com.electroscan.app-main-6:/layout/item_step.xml"
+    }
+]

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent_green">#00E676</color>
+    <color name="accent_green_dark">#00C853</color>
+    <color name="accent_orange">#FF9800</color>
+    <color name="accent_red">#F44336</color>
+    <color name="bg_dark">#0F1117</color>
+    <color name="bg_elevated">#22263A</color>
+    <color name="bg_surface">#1A1D27</color>
+    <color name="chip_background">#1E2235</color>
+    <color name="chip_stroke">#2E3255</color>
+    <color name="chip_text">#C8CCEE</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorPrimary">#0F1117</color>
+    <color name="colorPrimaryVariant">#0F1117</color>
+    <color name="colorSecondary">#00E676</color>
+    <color name="divider">#2A2D40</color>
+    <color name="text_hint">#555870</color>
+    <color name="text_primary">#EAEAF0</color>
+    <color name="text_secondary">#8A8EA8</color>
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="screen_padding">16dp</dimen>
+    <string name="app_name">ElectroScan</string>
+    <string name="no_components">No components detected</string>
+    <string name="no_projects">Not enough components for a project</string>
+    <string name="scan_prompt">Point camera at your electronics components</string>
+    <string name="scanning">Detecting components…</string>
+    <style name="IconButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:background">@drawable/icon_button_bg</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+    <style name="ScanButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/accent_green</item>
+        <item name="android:textColor">#000000</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:elevation">6dp</item>
+    </style>
+    <style name="Theme.ElectroScan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+</resources>

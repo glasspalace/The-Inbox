@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ElectroScan</string>
+    <string name="scan_prompt">Point camera at your electronics components</string>
+    <string name="scanning">Detecting components…</string>
+    <string name="no_components">No components detected</string>
+    <string name="no_projects">Not enough components for a project</string>
+</resources>

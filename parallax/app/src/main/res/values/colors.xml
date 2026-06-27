@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Core palette — dark electronics theme -->
+    <color name="bg_dark">#0F1117</color>
+    <color name="bg_surface">#1A1D27</color>
+    <color name="bg_elevated">#22263A</color>
+    <color name="accent_green">#00E676</color>
+    <color name="accent_green_dark">#00C853</color>
+    <color name="accent_orange">#FF9800</color>
+    <color name="accent_red">#F44336</color>
+
+    <color name="text_primary">#EAEAF0</color>
+    <color name="text_secondary">#8A8EA8</color>
+    <color name="text_hint">#555870</color>
+
+    <color name="divider">#2A2D40</color>
+
+    <!-- Chip colours -->
+    <color name="chip_background">#1E2235</color>
+    <color name="chip_text">#C8CCEE</color>
+    <color name="chip_stroke">#2E3255</color>
+
+    <!-- Status bar -->
+    <color name="colorPrimary">#0F1117</color>
+    <color name="colorPrimaryVariant">#0F1117</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorSecondary">#00E676</color>
+    <color name="colorOnSecondary">#000000</color>
+</resources>
