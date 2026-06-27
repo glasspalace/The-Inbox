@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: parallax-api
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build -w @parallax/shared && npm run build -w @parallax/api
+    startCommand: npm run start -w @parallax/api
+    healthCheckPath: /health
+    disk:
+      name: parallax-sqlite
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_URL
+        value: /var/data/parallax.sqlite
+      - key: CORS_ORIGIN
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: LIVEKIT_URL
+        sync: false
+      - key: LIVEKIT_API_KEY
+        sync: false
+      - key: LIVEKIT_API_SECRET
+        sync: false
+      - key: EXA_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: IP_HASH_SALT
+        generateValue: true
